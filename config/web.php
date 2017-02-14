@@ -54,9 +54,9 @@ $config = [
 		'excel'=>[
 			'class'=>'app\components\ExportToExcel',
 		],
-		'cache' => [
+		/*'cache' => [
 			'class' => 'yii\caching\FileCache',
-		],
+		],*/
 		'getid'=>[
 			'class'=>'app\components\GetUserId',
 		],

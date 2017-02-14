@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'stu_gender')->textInput(['maxlength' => 10]) ?>
 
+    <?= $form->field($model, 'stu_address')->textInput(['maxlength' => 45]) ?>
+
     <?= $form->field($model, 'stu_dob')->textInput() ?>
 
     <?= $form->field($model, 'stu_email_id')->textInput(['maxlength' => 65]) ?>
@@ -32,7 +34,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'stu_birthplace')->textInput(['maxlength' => 45]) ?>
 
-    <?= $form->field($model, 'stu_religion')->textInput(['maxlength' => 50]) ?>
+    <?= $form->field($model, 'stu_religion')->textInput(['maxlength' => 25]) ?>
 
     <?= $form->field($model, 'stu_admission_date')->textInput() ?>
 

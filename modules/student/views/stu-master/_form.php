@@ -33,8 +33,8 @@ $(function () {
 			    'template' => "{label}{input}{error}",
 			],
     ]); ?>
-    
-  
+
+
     <div class="box box-solid box-info col-xs-12 col-lg-12 no-padding">
       <div class="box-header with-border">
          <h4 class="box-title"><i class="fa fa-info-circle"></i> <?php echo Yii::t('stu', 'Personal Details'); ?></h4>
@@ -50,11 +50,17 @@ $(function () {
 	<button type="button" class="btn btn-danger" data-html=true data-toggle="popover" title="<?php echo Yii::t('stu','Student Login Note') ?>" data-trigger="focus" data-content="<?php echo Yii::t('stu', 'Unique Id is used as login username with') ?> <b><?= $stu_login_prefix ?> </b><?php echo Yii::t('stu', 'prefix.') ?> </br> <?php echo Yii::t('stu', 'Example: If Unique id : 123 so, Username :') ?> <?= $stu_login_prefix ?>123"><i class="fa fa-info-circle"></i></button>
     </div>
    </div>
-   
+
    <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
 	<div class="col-xs-12 col-sm-4 col-lg-4">
 		<?= $form->field($info, 'stu_title')->dropDownList($info->getTitleOptions(),['prompt'=>Yii::t('stu', '--- Select Title ---')]); ?>
-	</div>	
+    </div>
+
+       <div class="col-xs-12 col-sm-4 col-lg-4">
+           <?= $form->field($info, 'stu_address')->textInput() ?>
+       </div>
+
+
    </div>
 
    <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
@@ -75,20 +81,20 @@ $(function () {
 	<?= $form->field($info, 'stu_gender')->dropDownList($info->getGenderOptions(), ['prompt' => Yii::t('stu', '--- Select Gender ---')]) ?>
     </div>
 
-    <div class="col-xs-12 col-sm-4 col-lg-4">
-	<?= $form->field($info, 'stu_email_id')->textInput(['maxlength' => '60']) ?>
+          <div class="col-xs-12 col-sm-4 col-lg-4">
+            <?= $form->field($info, 'stu_email_id')->textInput(['maxlength' => '60']) ?>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+            <?= $form->field($info, 'stu_mobile_no')->textInput(['maxlength' => '12']) ?>
+        </div>
     </div>
-    <div class="col-xs-12 col-sm-4 col-lg-4">
-	<?= $form->field($info, 'stu_mobile_no')->textInput(['maxlength' => '12']) ?>
-    </div>
-   </div>
- 
+
    <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
 	<div class="col-xs-12 col-sm-4 col-lg-4">
 		<?= $form->field($info, 'stu_dob')->widget(yii\jui\DatePicker::className(),
 	            [
 			'model'=>$info,
-			'attribute'=>'stu_dob', 
+			'attribute'=>'stu_dob',
 	            'clientOptions' =>[
 	                'dateFormat' => 'dd-mm-yyyy',
 	                'changeMonth'=> true,
@@ -98,16 +104,30 @@ $(function () {
 	                'autoSize'=>true,],
 	            'options'=>[
 			'class'=>'form-control',
-	                 ],]) ?>		
-	</div> 
-	<div class="col-xs-12 col-sm-4 col-lg-4">
-		<?= $form->field($model, 'stu_master_category_id')->dropDownList(ArrayHelper::map(app\modules\student\models\StuCategory::find()->where(['is_status' => 0])->all(),'stu_category_id','stu_category_name'),['prompt'=>Yii::t('stu', '---  Select Category ---')]); ?>
-	</div> 
-	<div class="col-xs-12 col-sm-4 col-lg-4">
-		<?= $form->field($model, 'stu_master_nationality_id')->dropDownList(ArrayHelper::map(app\models\Nationality::find()->where(['is_status' => 0])->all(),'nationality_id','nationality_name'),['prompt'=>Yii::t('stu', '--- Select Nationality ---')]); ?>
-	</div> 
-   </div>
- 
+	                 ],]) ?>
+    </div>
+
+
+      <!-- form agama dan tempat lahir-->
+
+
+       <div class="col-xs-12 col-sm-4 col-lg-4">
+           <?= $form->field($info, 'stu_birthplace')->textInput() ?>
+       </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+            <?= $form->field($info, 'stu_religion')->dropDownList($info->getReligionOptions(),['prompt'=>Yii::t('stu', '--- Select Religion ---')]); ?>
+        </div>
+
+
+        <!--</div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+            <?/*= $form->field($model, 'stu_master_category_id')->dropDownList(ArrayHelper::map(app\modules\student\models\StuCategory::find()->where(['is_status' => 0])->all(),'stu_category_id','stu_category_name'),['prompt'=>Yii::t('stu', '---  Select Category ---')]); */?>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+            <?/*= $form->field($model, 'stu_master_nationality_id')->dropDownList(ArrayHelper::map(app\models\Nationality::find()->where(['is_status' => 0])->all(),'nationality_id','nationality_name'),['prompt'=>Yii::t('stu', '--- Select Nationality ---')]); */?>
+        </div>
+       </div>-->
+
 
   </div><!---./end box-body--->
 </div><!---./end box--->
@@ -128,7 +148,7 @@ $(function () {
                                 $( "#'.Html::getInputId($model, 'stu_master_batch_id').'" ).html( data );
                             }
                         );
-                    '    
+                    '
                 ]); ?>
     </div>
 
@@ -141,7 +161,7 @@ $(function () {
                             .done(function( data ) {
                                 $( "#'.Html::getInputId($model, 'stu_master_section_id').'" ).html( data );
                             }
-                        );'    
+                        );'
                 ]); ?>
     </div>
     <div class="col-xs-12 col-sm-4 col-lg-4">
@@ -170,7 +190,7 @@ $(function () {
     </div>
 
     <div class="col-xs-12 col-sm-4 col-lg-4">
-	<?php $stuStatusData = ['0'=>'General/Default']+ArrayHelper::map(app\modules\student\models\StuStatus::find()->where(['is_status' => 0])->all(),'stu_status_id','stu_status_name');   ?>  
+	<?php $stuStatusData = ['0'=>'General/Default']+ArrayHelper::map(app\modules\student\models\StuStatus::find()->where(['is_status' => 0])->all(),'stu_status_id','stu_status_name');   ?>
 	<?= $form->field($model, 'stu_master_stu_status_id')->dropDownList($stuStatusData); ?>
     </div>
    </div>
