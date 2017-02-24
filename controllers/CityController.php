@@ -30,7 +30,7 @@
  * RUDRA SOFTECH" logo. If the display of the logo is not reasonably feasible for
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by RUDRA SOFTECH".
-*****************************************************************************************/
+ *****************************************************************************************/
 
 /**
  * CityController implements the CRUD actions for City model.
@@ -69,11 +69,11 @@ class CityController extends Controller
     {
         $searchModel = new CitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-	$model = new City();
+        $model = new City();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-	    'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -97,24 +97,24 @@ class CityController extends Controller
     public function actionCreate()
     {
         $model = new City();
-	$searchModel = new CitySearch();
+        $searchModel = new CitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         if ($model->load(Yii::$app->request->post())) {
-		if (Yii::$app->request->isAjax) {
-                        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                        return ActiveForm::validate($model);
-       		}
+            if (Yii::$app->request->isAjax) {
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
 
-		$model->attributes = $_POST['City'];
-		$model->created_by = Yii::$app->getid->getId();
-		$model->created_at= new \yii\db\Expression('NOW()');
-		if($model->save())
-			return $this->redirect(['index']);
-		else
-			return $this->render('index', [
-              		  'model' => $model,'searchModel' => $searchModel,
-           		  'dataProvider' => $dataProvider,
-           		 ]);
+            $model->attributes = $_POST['City'];
+            $model->created_by = Yii::$app->getid->getId();
+            $model->created_at= new \yii\db\Expression('NOW()');
+            if($model->save())
+                return $this->redirect(['index']);
+            else
+                return $this->render('index', [
+                    'model' => $model,'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                ]);
 
         } else {
             return $this->render('index', [
@@ -136,26 +136,26 @@ class CityController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         if ($model->load(Yii::$app->request->post())) {
 
-		if (Yii::$app->request->isAjax) {
-                        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                        return ActiveForm::validate($model);
-       		}
+            if (Yii::$app->request->isAjax) {
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
 
-		$model->attributes = $_POST['City'];
-		$model->updated_by = Yii::$app->getid->getId();
-		$model->updated_at= new \yii\db\Expression('NOW()');
-		if($model->save())
-			return $this->redirect(['index']);
-		else
-			return $this->render('index', [
-               		 'model' => $model,'searchModel' => $searchModel,
-			    'dataProvider' => $dataProvider,
-			  ]);
+            $model->attributes = $_POST['City'];
+            $model->updated_by = Yii::$app->getid->getId();
+            $model->updated_at= new \yii\db\Expression('NOW()');
+            if($model->save())
+                return $this->redirect(['index']);
+            else
+                return $this->render('index', [
+                    'model' => $model,'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                ]);
 
         } else {
             return $this->render('index', [
                 'model' => $model,'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                'dataProvider' => $dataProvider,
             ]);
         }
     }
@@ -169,11 +169,11 @@ class CityController extends Controller
     public function actionDelete($id)
     {
         //$this->findModel($id)->delete();
-	$model = City::findOne($id);
-	$model->is_status = 2;
-	$model->updated_by = Yii::$app->getid->getId();
-	$model->updated_at= new \yii\db\Expression('NOW()');
-	$model->save();
+        $model = City::findOne($id);
+        $model->is_status = 2;
+        $model->updated_by = Yii::$app->getid->getId();
+        $model->updated_at= new \yii\db\Expression('NOW()');
+        $model->save();
 
         return $this->redirect(['index']);
     }

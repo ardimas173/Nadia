@@ -45,6 +45,10 @@ $config = [
 		    ],
 	],
     'components' => [
+
+        'urlManager'=>[
+            'enablePrettyUrl'=>true,
+        ],
 		'request' => [
 			'cookieValidationKey' => 'JDqkJaMgIITAKcsJY6yvLQdM9jf7WghX',
 		],

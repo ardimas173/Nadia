@@ -51,18 +51,17 @@ $(function () {
     </div>
    </div>
 
-   <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
+  <!-- <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
 	<div class="col-xs-12 col-sm-4 col-lg-4">
-		<?= $form->field($info, 'stu_title')->dropDownList($info->getTitleOptions(),['prompt'=>Yii::t('stu', '--- Select Title ---')]); ?>
-    </div>
+		<?/*= $form->field($info, 'stu_title')->dropDownList($info->getTitleOptions(),['prompt'=>Yii::t('stu', '--- Select Title ---')]); */?>
+    </div>-->
 
-       <div class="col-xs-12 col-sm-4 col-lg-4">
-           <?= $form->field($info, 'stu_address')->textInput() ?>
+       <!--<div class="col-xs-12 col-sm-4 col-lg-4">
+           <?/*= $form->field($info, 'stu_address')->textInput() */?>
        </div>
 
-
    </div>
-
+-->
    <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
     <div class="col-xs-12 col-sm-4 col-lg-4">
 	<?= $form->field($info, 'stu_first_name')->textInput() ?>

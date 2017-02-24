@@ -82,14 +82,8 @@ class StuInfo extends \yii\db\ActiveRecord
     const TYPE_MR='Mr.';
     const TYPE_MRS='Mrs.';
     const TYPE_MISS='Ms.';
-
     const TYPE_PROTESTAN='Kristen';
     const TYPE_KATOLIK='Khatolik';
-
-
-
-
-
 
 
 

@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <section class="content-header">
 <div class="row">
   <div class="col-xs-12">
-	<h2 class="page-header">	
+	<h2 class="page-header">
 		<i class="fa fa-user"></i>  <?php echo Yii::t('stu', 'Student Profile'); ?>
 		<div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
 		<?php if(Yii::$app->user->can("/student/export-data/student-profile-pdf")) { ?>
@@ -101,23 +101,23 @@ $this->params['breadcrumbs'][] = $this->title;
 		</ul>
 		 <div id='content' class="tab-content responsive">
 			<div class="tab-pane active" id="personal">
-				<?= $this->render('_tab_stu_personal', ['info' => $info, 'model' => $model]) ?>	
+				<?= $this->render('_tab_stu_personal', ['info' => $info, 'model' => $model]) ?>
 			</div>
 			<div class="tab-pane" id="academic">
-				<?= $this->render('_tab_stu_academic', ['info' => $info, 'model' => $model]) ?>	
+				<?= $this->render('_tab_stu_academic', ['info' => $info, 'model' => $model]) ?>
 			</div>
 			<div class="tab-pane" id="guardians">
-				<?= $this->render('_tab_stu_guardians', ['guardian'=>$guardian, 'model'=>$model]) ?>	
+				<?= $this->render('_tab_stu_guardians', ['guardian'=>$guardian, 'model'=>$model]) ?>
 			</div>
 			<div class="tab-pane" id="address">
-				<?= $this->render('_tab_stu_address', ['address' => $address, 'model'=>$model]) ?>	
+				<?= $this->render('_tab_stu_address', ['address' => $address, 'model'=>$model]) ?>
 			</div>
 			<div class="tab-pane" id="documents">
-				<?= $this->render('_tab_stu_documents', ['stu_docs' => $stu_docs, 'model'=>$model]) ?>	
+				<?= $this->render('_tab_stu_documents', ['stu_docs' => $stu_docs, 'model'=>$model]) ?>
 			</div>
 		 <?php if(!Yii::$app->session->get('stu_id')) : ?>
 			<div class="tab-pane" id="fees">
-				<?= $this->render('_tab_stu_fees', ['model' => $feesTranModel, 'FccModel'=>$feesCatModel, 'stuData'=>$model]) ?>	
+				<?= $this->render('_tab_stu_fees', ['model' => $feesTranModel, 'FccModel'=>$feesCatModel, 'stuData'=>$model]) ?>
 			</div>
 		<?php endif; ?>
 		</div>
@@ -144,7 +144,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'id' => 'guardModal',
 		'header' => "<h3>Update Guardian</h3>",
 	]);
- 	yii\bootstrap\Modal::end(); 
+ 	yii\bootstrap\Modal::end();
 ?>
 <script>
 /***

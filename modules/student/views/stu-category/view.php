@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'confirm' => Yii::t('stu', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
-        ]) ?> 
+        ]) ?>
 	</div>
   </div>
 </div>

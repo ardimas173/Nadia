@@ -112,7 +112,7 @@ $(function () {
                       'options'=>[
 			  'class'=>'form-control',
                          ],]) ?>
-   
+
     </div>
     <div class="col-xs-12 col-sm-4 col-lg-4">
     <?= $form->field($model, 'stu_master_category_id')->dropDownList(ArrayHelper::map(app\modules\student\models\StuCategory::find()->where(['is_status' => 0])->all(),'stu_category_id','stu_category_name'),['prompt'=>Yii::t('stu', '--- Select Category ---')]); ?>
@@ -149,10 +149,10 @@ $(function () {
 				'maximumInputLength' => 10,
 				'multiple' => true
 			],
-		]); 
+		]);
 	?>
     </div>
-   </div> 
+   </div>
 
     </div> <!--/ box-body -->
     </div> <!--/ box -->

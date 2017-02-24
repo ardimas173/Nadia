@@ -1,12 +1,12 @@
 
 <?php
-use yii\helpers\Html; 
+use yii\helpers\Html;
 $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()));
 ?>
 
 <div class="row">
   <div class="col-xs-12">
-	<h2 class="page-header">	
+	<h2 class="page-header">
 	<i class="fa fa-info-circle"></i> <?php echo Yii::t('stu', 'Personal Details'); ?>
 	<div class="<?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'?>">
 	<?php if((Yii::$app->user->can("/student/stu-master/update") && ($_REQUEST['id'] == Yii::$app->session->get('stu_id'))) || (in_array("SuperAdmin", $adminUser)) || Yii::$app->user->can("updateAllStuInfo")) { ?>
@@ -58,10 +58,10 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
 
 
 	<div class="col-md-12 col-xs-12 col-sm-12">
-	  <div class="col-lg-6 col-sm-6 col-xs-12 no-padding">
-		<div class="col-lg-6 col-xs-6 edusec-profile-label edusecArLangCss"><?= $model->getAttributeLabel('stu_master_category_id') ?></div>
-		<div class="col-lg-6 col-xs-6 edusec-profile-text"><?= !empty($model->stuMasterCategory->stu_category_name) ? $model->stuMasterCategory->stu_category_name : Yii::t("stu", "Not Set") ?></div>
-	  </div>
+        <div class="col-lg-6 col-sm-6 col-xs-12 no-padding">
+            <div class="col-lg-6 col-xs-6 edusec-profile-label edusecArLangCss"><?= $info->getAttributeLabel('stu_languages') ?></div>
+            <div class="col-lg-6 col-xs-6 edusec-profile-text"><?= $info->stu_languages ?></div>
+      </div>
 	  <div class="col-lg-6 col-sm-6 col-xs-12 no-padding">
 		<div class="col-lg-6 col-xs-6 edusec-profile-label edusecArLangCss"><?= $info->getAttributeLabel('stu_religion') ?></div>
 		<div class="col-lg-6 col-xs-6 edusec-profile-text"><?= $info->stu_religion ?></div>
@@ -77,11 +77,6 @@ $adminUser = array_keys(\Yii::$app->authManager->getRolesByUser(Yii::$app->user-
 		<div class="col-lg-6 col-xs-6 edusec-profile-label edusecArLangCss"><?= $info->getAttributeLabel('stu_birthplace') ?></div>
 		<div class="col-lg-6 col-xs-6 edusec-profile-text"><?= $info->stu_birthplace ?></div>
 	  </div>
-	</div>
-
-	 <div class="col-md-12 col-sm-12 col-xs-12">
-		<div class="col-md-3 col-sm-3 col-xs-6 edusec-profile-label edusecArLangCss"><?= $info->getAttributeLabel('stu_languages') ?></div>
-		<div class="col-md-9 col-sm-9 col-xs-6 edusec-profile-text"><?= $info->stu_languages ?></div>
 	</div>
 
 </div> <!---Main Row Div--->

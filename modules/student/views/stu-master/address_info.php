@@ -68,19 +68,7 @@ $this->params['breadcrumbs'][] = Yii::t('stu', 'Update Address Details');
                 ]		
 			);    ?>
       </div>
-       <div class="col-xs-12 col-sm-6 col-lg-6">
-   	 <?php echo $form->field($address,'stu_cadd_state')->dropDownList(ArrayHelper::map(\app\models\State::find()->where(['state_country_id' => $address->stu_cadd_country, 'is_status' => 0])->all(),'state_id','state_name'),
-		[
-                    'prompt'=>Yii::t('stu', '--- Select State ---'),
-                    'onchange'=>'
-                        $.get( "'.Url::toRoute('dependent/ustud_c_city').'", { id: $(this).val() } )
-                            .done(function( data ) {
-                                $( "#'.Html::getInputId($address, 'stu_cadd_city').'" ).html( data );
-                            }
-                        );'    
-                ]		
-			);   ?>
-	</div>
+
 </div>
 
 <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
@@ -97,7 +85,7 @@ $this->params['breadcrumbs'][] = Yii::t('stu', 'Update Address Details');
     	<?= $form->field($address, 'stu_cadd_house_no')->textInput(['maxlength' => 25]) ?>
      </div>
     <div class="col-xs-12 col-sm-6 col-lg-6">	 	
-    	<?= $form->field($address, 'stu_cadd_phone_no')->textInput(['maxlength' => 25]) ?>
+    	<?= $form->field($address, 'stu_cadd_phone_no')->textInput(['maxlength' => 12]) ?>
     </div>
 </div>
 

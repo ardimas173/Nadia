@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = Yii::t('stu', 'Update Academic Details');
 		        $( "#'.Html::getInputId($model, 'stu_master_batch_id').'" ).html( data );
 		    }
 		);
-	    '    
+	    '
 	]); ?>
     </div>
     <div class="col-xs-12 col-sm-6 col-lg-6">
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = Yii::t('stu', 'Update Academic Details');
 		'options'=>[
 			'class'=>'form-control',
 		],
-	]) 
+	])
 	?>
     </div>
    </div>
