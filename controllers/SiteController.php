@@ -102,7 +102,9 @@ class SiteController extends Controller
                     ])
                 ->queryScalar();
 		    $currentFeesData = \app\modules\fees\models\FeesPaymentTransaction::getUnpaidTotal($isStudent);
-        	    return $this->render('stu-dashboard', ['holidayData'=>$holidayData, 'currentFeesData'=>$currentFeesData, 'payFees'=>$payFees]);
+        	    return $this->render('stu-dashboard', [
+			    'holidayData'=>$holidayData, 'currentFeesData'=>$currentFeesData, 'payFees'=>$payFees
+		    ]);
 		}
 		else if(isset($isEmployee))
 		    return $this->render('emp-dashboard', ['holidayData'=>$holidayData]);

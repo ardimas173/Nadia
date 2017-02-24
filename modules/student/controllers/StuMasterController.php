@@ -166,13 +166,13 @@ class StuMasterController extends Controller
 
 			if($info->save(false))
 			{
-			$user->save(false);
+			//$user->save(false);
 			$address->save(false);
 			}
 
 			$model->stu_master_stu_address_id = $address->stu_address_id;
 			$model->stu_master_stu_info_id = $info->stu_info_id;
-			$model->stu_master_user_id = $user->user_id;
+			$model->stu_master_user_id = "";
 			$model->created_by = Yii::$app->getid->getId();
 			$model->created_at = new \yii\db\Expression('NOW()');
 			$model->save(false);
@@ -181,10 +181,10 @@ class StuMasterController extends Controller
 			$s_info->stu_info_stu_master_id = $model->stu_master_id;
 			$s_info->save(false);
 
-			$auth_assign->item_name = 'Student';
-			$auth_assign->user_id = $user->user_id;
-			$auth_assign->created_at =  date_format(date_create(),'U');
-			$auth_assign->save(false);
+			//$auth_assign->item_name = 'Student';
+			//$auth_assign->user_id = $user->user_id;
+			//$auth_assign->created_at =  date_format(date_create(),'U');
+			//$auth_assign->save(false);
 
 			if ($model->save()) {
 			return $this->redirect(['view', 'id'=>$model->stu_master_id]);

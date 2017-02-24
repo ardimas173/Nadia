@@ -34,6 +34,11 @@ $(function () {
 			],
     ]); ?>
 
+        <?= $form->errorSummary($info);?>
+        ==========================
+        <?= $form->errorSummary($model);?>
+
+
 
     <div class="box box-solid box-info col-xs-12 col-lg-12 no-padding">
       <div class="box-header with-border">
@@ -199,7 +204,7 @@ $(function () {
 
     <div class="form-group col-xs-12 col-sm-6 col-lg-4 no-padding edusecArLangCss">
 	<div class="col-xs-6">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('stu' ,'Create') : Yii::t('stu', 'Update'), ['class' => $model->isNewRecord  ? 'btn btn-block btn-success' : 'btn btn-block btn-info']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('stu' ,'Createsss') : Yii::t('stu', 'Update'), ['class' => $model->isNewRecord  ? 'btn btn-block btn-success' : 'btn btn-block btn-info']) ?>
 	</div>
 	<div class="col-xs-6">
 	    <?= Html::a(Yii::t('stu', 'Cancel'), ['index'], ['class' => 'btn btn-default btn-block']); ?>
