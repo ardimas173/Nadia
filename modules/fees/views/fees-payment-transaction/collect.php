@@ -56,6 +56,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url'=>['collect']];
 <!---End Select Fees Collection Category--->
 
 <?php
+
 if($dispStatus) :
 	$totalAmount = $gTotalAmount = $gpayFees = $gActualCollect = $payFees = $actualCollect = 0;
 	$feesDetails = \app\modules\fees\models\FeesCategoryDetails::find()->where(['fees_details_category_id' => $FccModel->fees_collect_category_id, 'is_status'=>0])->asArray()->all();
@@ -137,20 +138,29 @@ if($dispStatus) :
 		echo '</tr>';
 		$sr = 1;
 		foreach($stuData as $key=>$value) {
-			$stuDetails = \app\modules\student\models\StuMaster::findOne($value);
-			echo '<tr>';
-			echo '<td class="text-center">'.$sr++.'</td>';
-			echo '<td>'.(!empty($stuDetails->stuMasterStuInfo->stu_unique_id) ? $stuDetails->stuMasterStuInfo->stu_unique_id : Yii::t("fees", "(Not Set)")).'</td>';
-			echo '<td>'.$stuDetails->stuMasterStuInfo->name.'</td>';
-			echo '<td>'.$totalAmount.'</td>';
 			$payFees = $FptModel->getStuTotalPayFees($value, $FccModel->fees_collect_category_id);
-			echo '<td>'.(!empty($payFees) ? $payFees : "0").'</td>';
-			echo '<td>'.$actualCollect = ($totalAmount-$payFees).'</td>';
-			echo '<td>'.Html::a(Yii::t('fees', 'TakeFees'), ['pay-fees', 'sid'=>$value, 'fcid'=>$FccModel->fees_collect_category_id], ["target"=>"_blank", 'class'=>'btn btn-block btn-primary']).'</td>';
-			echo '</tr>';
-			$gTotalAmount+=$totalAmount;
-			$gpayFees+=$payFees;
-			$gActualCollect+=$actualCollect;
+			$payFees = (!empty($payFees) ? $payFees : "0");
+			$actualCollect = ($totalAmount-$payFees);
+
+				if($actualCollect != 0)
+				{
+					$stuDetails = \app\modules\student\models\StuMaster::findOne($value);
+					echo '<tr>';
+					echo '<td class="text-center">'.$sr++.'</td>';
+					echo '<td>'.(!empty($stuDetails->stuMasterStuInfo->stu_unique_id) ? $stuDetails->stuMasterStuInfo->stu_unique_id : Yii::t("fees", "(Not Set)")).'</td>';
+					echo '<td>'.$stuDetails->stuMasterStuInfo->name.'</td>';
+					echo '<td>'.$totalAmount.'</td>';
+					echo '<td>'.(!empty($payFees) ? $payFees : "0").'</td>';
+					echo '<td>'.$actualCollect = ($totalAmount-$payFees).'</td>';
+					echo '<td>'.Html::a(Yii::t('fees', 'TakeFees'), ['pay-fees', 'sid'=>$value, 'fcid'=>$FccModel->fees_collect_category_id], ["target"=>"_blank", 'class'=>'btn btn-block btn-primary']).'</td>';
+					echo '</tr>';
+					$gTotalAmount+=$totalAmount;
+					$gpayFees+=$payFees;
+					$gActualCollect+=$actualCollect;
+				}
+
+
+
 		}
 		echo '<tr class="bg-aqua"><th colspan=3 class="text-right">'.Yii::t('fees', 'GRAND TOTAL').'</th>';
 		echo '<th>'.$gTotalAmount.'</th>';

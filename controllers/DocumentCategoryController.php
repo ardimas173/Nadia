@@ -119,6 +119,8 @@ class DocumentCategoryController extends Controller
         } else {
             return $this->render('index', [
                 'model' => $model,
+                'searchModel'=>$searchModel,
+                'dataProvider'=>$dataProvider
             ]);
         }
     }

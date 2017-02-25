@@ -339,7 +339,7 @@ class StuMasterController extends Controller
 				$stu_docs->stu_docs_path->saveAs(Yii::getAlias('@webroot').'/data/stu_docs/' .$stu_docs->stu_docs_path = $newFName);
 			}
 				$stu_docs->stu_docs_details = $_REQUEST['StuDocs']['stu_docs_details'][$k];
-				/*$stu_docs->stu_docs_category_id = $_REQUEST['StuDocs']['stu_docs_category_id'][$k];*/
+				$stu_docs->stu_docs_category_id = $_REQUEST['StuDocs']['stu_docs_category_id'][$k];
 				$stu_docs->stu_docs_stu_master_id = $_REQUEST['StuDocs']['stu_docs_stu_master_id'];
 				$stu_docs->created_by = Yii::$app->getid->getId();
 				$stu_docs->stu_docs_submited_at = new \yii\db\Expression('NOW()');
