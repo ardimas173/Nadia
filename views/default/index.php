@@ -10,6 +10,21 @@ $this->params['breadcrumbs'][] = $this->title;
 		<h3 class="box-title"><i class="glyphicon glyphicon-cog"></i> <?php echo Yii::t('app', 'Master Configuration'); ?></h3>
    </div>
    <div class="box-body">
+
+   <div class="row">
+       <div class="col-md-4 col-sm-6 col-xs-12">
+           <div class="edusec-link-box">
+               <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-flag-checkered"></i></span>
+               <div class="edusec-link-box-content">
+                   <span class="edusec-link-box-text"><?= Html::a(Yii::t('app', 'Year Active'), ['/nationality']);?></span>
+                   <span class="edusec-link-box-number"><?= app\models\Nationality::find()->where(['is_status'=>0])->count(); ?></span>
+                   <span class="edusec-link-box-desc"></span>
+                   <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('app', 'Create New'), ['/nationality/create']); ?></span>
+               </div><!-- /.info-box-content -->
+           </div><!-- /.info-box -->
+       </div>
+   </div>
+       <hr>
 	<div class="row">
 		<div class="col-md-4 col-sm-6 col-xs-12">
 		      <div class="edusec-link-box">
@@ -45,7 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		      </div><!-- /.info-box -->
 		</div>
 
-		<!---Start Second Row Display Configuration--->
 		<div class="col-md-4 col-sm-6 col-xs-12">
 		      <div class="edusec-link-box">
 		        <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-university"></i></span>
@@ -57,7 +71,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		        </div><!-- /.info-box-content -->
 		      </div><!-- /.info-box -->
 		</div>
-
 		<div class="col-md-4 col-sm-6 col-xs-12">
 		      <div class="edusec-link-box">
 		        <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-language"></i></span>
@@ -69,8 +82,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		        </div><!-- /.info-box-content -->
 		      </div><!-- /.info-box -->
 		</div>
-
-
 		<div class="col-md-4 col-sm-6 col-xs-12">
 		      <div class="edusec-link-box">
 		        <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-calendar-o"></i></span>
@@ -94,25 +105,19 @@ $this->params['breadcrumbs'][] = $this->title;
 		        </div><!-- /.info-box-content -->
 		      </div><!-- /.info-box -->
 		</div>
-
-
-		<div class="col-md-4 col-sm-6 col-xs-12">
-		      <div class="edusec-link-box">
-		        <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-flag-checkered"></i></span>
-		        <div class="edusec-link-box-content">
-		          <span class="edusec-link-box-text"><?= Html::a(Yii::t('app', 'Nationality'), ['/nationality']);?></span>
-		          <span class="edusec-link-box-number"><?= app\models\Nationality::find()->where(['is_status'=>0])->count(); ?></span>
-			 <span class="edusec-link-box-desc"></span>
-			  <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('app', 'Create New'), ['/nationality/create']); ?></span>
-		        </div><!-- /.info-box-content -->
-		      </div><!-- /.info-box -->
-		</div>
-		
-
-	</div> <!-- /. End Row-->
-	
-
-</div><!-- /.box-body -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="edusec-link-box">
+                <span class="edusec-link-box-icon bg-aqua"><i class="fa fa-flag-checkered"></i></span>
+                <div class="edusec-link-box-content">
+                    <span class="edusec-link-box-text"><?= Html::a(Yii::t('app', 'Nationality'), ['/nationality']);?></span>
+                    <span class="edusec-link-box-number"><?= app\models\Nationality::find()->where(['is_status'=>0])->count(); ?></span>
+                    <span class="edusec-link-box-desc"></span>
+                    <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('app', 'Create New'), ['/nationality/create']); ?></span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div>
+	</div>
+</div>
 </div>
 
 

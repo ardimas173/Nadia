@@ -65,7 +65,8 @@ class CoursesController extends Controller
             ],
         ];
     }
-    public function actions() 
+
+    public function actions()
     {
 	    return [
 		'toggle' => [
@@ -78,10 +79,6 @@ class CoursesController extends Controller
 	    ];
     }
 
-    /**
-     * Lists all Courses models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new CoursesSearch();
@@ -93,11 +90,6 @@ class CoursesController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Courses model.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -105,68 +97,30 @@ class CoursesController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Courses model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
         $model = new Courses();
-	$batch = new Batches();
-	$section = new Section(); 
+        $batch = new Batches();
+        $section = new Section();
 
-	if (($model->load(Yii::$app->request->post()) && $batch->load(Yii::$app->request->post()) && $section->load(Yii::$app->request->post())) && Yii::$app->request->isAjax) {
-        	\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        	return array_merge(ActiveForm::validate($model), ActiveForm::validate($batch), ActiveForm::validate($section));
- 	}
+        if ($model->load(Yii::$app->request->post())) {
+            $model->attributes = $_POST['Courses'];
+            $model->created_by = Yii::$app->getid->getId();
+            $model->created_at = new \yii\db\Expression('NOW()');
 
-        if ($model->load(Yii::$app->request->post()) && $batch->load(Yii::$app->request->post()) && $section->load(Yii::$app->request->post())) {
-
-		$model->attributes = $_POST['Courses'];
-		$model->created_by = Yii::$app->getid->getId(); 
-		$model->created_at = new \yii\db\Expression('NOW()');
-	
-		if($model->save())
-		{
-		    if(isset($_POST['Batches']))
-		    {
-			   $batch->attributes = $_POST['Batches'];
-			   $batch->batch_course_id = $model->course_id;
-			   $batch->start_date = date('Y-m-d', strtotime($_POST['Batches']['start_date']));
-			   $batch->end_date = date('Y-m-d', strtotime($_POST['Batches']['end_date']));
-			   $batch->created_by = Yii::$app->getid->getId();
-			   $batch->created_at= new \yii\db\Expression('NOW()');
-			   if($batch->save())
-			   {
-				$section->attributes = $_POST['Section'];
-				$section->section_batch_id = $batch->batch_id;
-				$section->created_by = Yii::$app->getid->getId();
-				$section->created_at = new \yii\db\Expression('NOW()');
-				
-				if($section->save())
-					return $this->redirect(['index']);
-				else
-					return $this->render('create', ['model' => $model, 'batch' => $batch, 'section' => $section,]);	
-			   }
-		     }
-		}
-		else
-		    return $this->render('create', ['model' => $model, 'batch' => $batch, 'section' => $section,]);
+            if ($model->save())
+                // TODO-IB : add batches otomatis berdasarkan batch yang aktif beserta info klass yang baru di add
+                return $this->redirect(['index']);
+            else
+                return $this->render('create', ['model' => $model]);
         }
-	else {
+        else {
             return $this->render('create', [
                 'model' => $model, 'batch' => $batch, 'section' => $section,
             ]);
         }
     }
 
-    /**
-     * Updates an existing Courses model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -189,12 +143,6 @@ class CoursesController extends Controller
         }
     }
 
-    /**
-     * Deletes an existing Courses model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
 	$batch = Batches::find()->where('batch_course_id='.$id.' AND is_status!=2')->exists();
@@ -218,13 +166,6 @@ class CoursesController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Courses model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Courses the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Courses::findOne($id)) !== null) {

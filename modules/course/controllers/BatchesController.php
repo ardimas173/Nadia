@@ -1,39 +1,4 @@
 <?php
-/*****************************************************************************************
- * EduSec  Open Source Edition is a School / College management system developed by
- * RUDRA SOFTECH. Copyright (C) 2010-2015 RUDRA SOFTECH.
-
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
-
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
-
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses. 
-
- * You can contact RUDRA SOFTECH, 1st floor Geeta Ceramics, 
- * Opp. Thakkarnagar BRTS station, Ahmedbad - 382350, India or
- * at email address info@rudrasoftech.com.
- * 
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU Affero General Public License version 3.
- 
- * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "Powered by
- * RUDRA SOFTECH" logo. If the display of the logo is not reasonably feasible for
- * technical reasons, the Appropriate Legal Notices must display the words
- * "Powered by RUDRA SOFTECH".
- *****************************************************************************************/
-
-/**
- * @package EduSec.modules.course.controllers 
- */
 
 namespace app\modules\course\controllers;
 
@@ -62,7 +27,8 @@ class BatchesController extends Controller
             ],
         ];
     }
-    public function actions() 
+
+    public function actions()
     {
 	    return [
 		'toggle' => [
@@ -74,10 +40,7 @@ class BatchesController extends Controller
 		],
 	    ];
     } 
-    /**
-     * Lists all Batches models.
-     * @return mixed
-     */
+
     public function actionIndex()
     {
         $searchModel = new BatchesSearch();
@@ -89,11 +52,6 @@ class BatchesController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Batches model.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -101,11 +59,6 @@ class BatchesController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Batches model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
         $model = new Batches();
@@ -134,12 +87,6 @@ class BatchesController extends Controller
         }
     }
 
-    /**
-     * Updates an existing Batches model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -164,12 +111,6 @@ class BatchesController extends Controller
         }
     }
 
-    /**
-     * Deletes an existing Batches model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
 	$section = Section::find()->where(['section_batch_id' => $id, 'is_status' => 0])->exists();
@@ -192,13 +133,6 @@ class BatchesController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Batches model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Batches the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Batches::findOne($id)) !== null) {
