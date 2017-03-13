@@ -84,7 +84,8 @@ class Batches extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['batch_name', 'batch_course_id', 'batch_alias', 'start_date', 'end_date', 'created_at', 'created_by'], 'required', 'message' => ''],
+            [['batch_name', 'batch_alias', 'start_date', 'end_date', 'created_at', 'created_by'], 'required', 'message' => ''],
+//            [['batch_name', 'batch_course_id', 'batch_alias', 'start_date', 'end_date', 'created_at', 'created_by'], 'required', 'message' => ''],
             [['batch_course_id', 'created_by', 'updated_by', 'is_status'], 'integer', 'message' => ''],
             [['start_date', 'end_date', 'created_at', 'updated_at'], 'safe', 'message' => ''],
             [['batch_name'], 'string', 'max' => 120],

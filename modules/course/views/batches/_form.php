@@ -25,17 +25,15 @@ else
 					    'template' => "{label}{input}{error}",
 					],
 		    ]); ?>
-    		<div class="col-xs-12 col-sm-12 col-lg-12">
-    			<?= $form->field($model, 'batch_name')->textInput(['maxlength' => 100, 'placeholder' => $model->getAttributeLabel('batch_name')]) ?>
+            <div class="col-xs-12 col-lg-12 no-padding">
+                <div class="col-xs-12 col-sm-6 col-lg-6">
+    			    <?= $form->field($model, 'batch_name')->textInput(['maxlength' => 100, 'placeholder' => $model->getAttributeLabel('batch_name')]) ?>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-6">
+                        <?= $form->field($model, 'batch_alias')->textInput(['maxlength' => 35, 'placeholder' => $model->getAttributeLabel('batch_alias')]) ?>
+                    </div>
     		</div>
-			<div class="col-xs-12 col-lg-12 no-padding">
-    			<div class="col-xs-12 col-sm-6 col-lg-6">
-    				<?= $form->field($model, 'batch_course_id')->dropDownList(ArrayHelper::map(app\modules\course\models\Courses::find()->all(),'course_id','course_name'),['prompt'=>Yii::t('course', '--- Select Course ---')]); ?>
-    			</div>
-    			<div class="col-xs-12 col-sm-6 col-lg-6">
-    				<?= $form->field($model, 'batch_alias')->textInput(['maxlength' => 35, 'placeholder' => $model->getAttributeLabel('batch_alias')]) ?>
-    			</div>
-			</div>
+
 			<div class="col-xs-12 col-lg-12 no-padding">
     			<div class="col-xs-12 col-sm-6 col-lg-6">
     				<?= $form->field($model, 'start_date')->widget(yii\jui\DatePicker::className(),

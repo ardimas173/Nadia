@@ -24,6 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="courses-create">
      <?= $this->render('_form', [
-        'model' => $model, 'batch' => $batch, 'section' => $section,
+        'model' => $model
     ]) ?>
 </div>

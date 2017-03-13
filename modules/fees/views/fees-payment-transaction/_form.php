@@ -48,7 +48,7 @@ use yii\grid\GridView;
 	</tr>
 	<tr>
 		<th><?php echo $stuData->getAttributeLabel('stu_master_section_id'); ?></th>
-		<td><?php echo $stuData->stuMasterSection->section_name; ?></td>
+		<td><?php //echo $stuData->stuMasterSection->section_name; ?></td>
 	</tr>
 	<tr>
 		<th><?php echo $stuData->getAttributeLabel('stu_master_stu_status_id'); ?></th>

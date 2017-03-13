@@ -48,60 +48,59 @@ $this->params['breadcrumbs'][] = $this->title;
 		'summary'=>'',
 		'columns' => [
 		    ['class' => 'yii\grid\SerialColumn'],
-
 		    'batch_name',
 		    'batch_alias',
+//		    [
+//			      'label' => Yii::t('app','Course'),
+//			      'attribute' => 'batch_course_id',
+//			      'value' => 'batchCourse.course_name',
+//			      'filter' => ArrayHelper::map(app\modules\course\models\Courses::find()->all(), 'course_id', 'course_name')
+//		    ],
 		    [
-			      'label' => Yii::t('app','Course'),
-			      'attribute' => 'batch_course_id',
-			      'value' => 'batchCourse.course_name',
-			      'filter' => ArrayHelper::map(app\modules\course\models\Courses::find()->all(), 'course_id', 'course_name')
+                'attribute' => 'start_date',
+                'value' => function ($data) {
+                        return (!empty($data->start_date) ? Yii::$app->formatter->asDate($data->start_date) : ' - ');
+                    },
+                'filter' => \yii\jui\DatePicker::widget([
+                        'model'=>$searchModel,
+                        'attribute'=>'start_date',
+                        'clientOptions' =>[
+                            'dateFormat' => 'dd-mm-yyyy',
+                            'changeMonth'=> true,
+                            'changeYear'=> true,
+                    'defaultValue'=>null,
+                    'yearRange'=>'1900:'.(date('Y')+1),
+                    'defaultDate'=> null,],
+                     'options'=>[
+                    'id' => 'start_date',
+                            'value' => NULL,
+                    'class'=>'form-control',
+                             ],
+                    ]),
+                'format' => 'html',
 		    ],
 		    [
-			'attribute' => 'start_date',
-			'value' => function ($data) {
-					return (!empty($data->start_date) ? Yii::$app->formatter->asDate($data->start_date) : ' - ');
-				},
-			'filter' => \yii\jui\DatePicker::widget([
-		            'model'=>$searchModel,
-		            'attribute'=>'start_date',
-		            'clientOptions' =>[
-		                'dateFormat' => 'dd-mm-yyyy',
-		                'changeMonth'=> true,
-		                'changeYear'=> true,
-				'defaultValue'=>null,
-				'yearRange'=>'1900:'.(date('Y')+1),
-				'defaultDate'=> null,],
-			     'options'=>[
-				'id' => 'start_date',
-		                'value' => NULL,
-				'class'=>'form-control',
-		                 ],
-		        ]),
-			'format' => 'html',
-		    ],
-		    [
-			'attribute' => 'end_date',
-			'value' => function ($data) {
-					return (!empty($data->end_date) ? Yii::$app->formatter->asDate($data->end_date) : ' - ');
-				},
-			'filter' => \yii\jui\DatePicker::widget([
-		            'model'=>$searchModel,
-		            'attribute'=>'end_date',
-		            'clientOptions' =>[
-		                'dateFormat' => 'dd-mm-yyyy',
-		                'changeMonth'=> true,
-		                'changeYear'=> true,
-				'defaultValue'=>null,
-				'defaultDate'=> null,
-				'yearRange'=>'1900:'.(date('Y')+1),],
-			     'options'=>[
-				'id' => 'end_date',
-		                'value' => NULL,
-				'class'=>'form-control',
-		                 ],
-		        ]),
-			'format' => 'html',
+                'attribute' => 'end_date',
+                'value' => function ($data) {
+                        return (!empty($data->end_date) ? Yii::$app->formatter->asDate($data->end_date) : ' - ');
+                    },
+                'filter' => \yii\jui\DatePicker::widget([
+                        'model'=>$searchModel,
+                        'attribute'=>'end_date',
+                        'clientOptions' =>[
+                            'dateFormat' => 'dd-mm-yyyy',
+                            'changeMonth'=> true,
+                            'changeYear'=> true,
+                    'defaultValue'=>null,
+                    'defaultDate'=> null,
+                    'yearRange'=>'1900:'.(date('Y')+1),],
+                     'options'=>[
+                    'id' => 'end_date',
+                            'value' => NULL,
+                    'class'=>'form-control',
+                             ],
+                    ]),
+                'format' => 'html',
 		    ],
 		    [
 				'class' => '\pheme\grid\ToggleColumn',

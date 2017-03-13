@@ -42,30 +42,9 @@ namespace app\modules\course\models;
 
 use Yii;
 use app\models\User;
-/**
- * This is the model class for table "courses".
- *
- * @property integer $course_id
- * @property string $course_name
- * @property string $course_code
- * @property string $course_alias
- * @property string $created_at
- * @property integer $created_by
- * @property string $updated_at
- * @property integer $updated_by
- * @property integer $is_status
- *
- * @property Batches[] $batches
- * @property Users $createdBy
- * @property Users $updatedBy
- * @property StuAdmissionMaster[] $stuAdmissionMasters
- * @property StuMaster[] $stuMasters
- */
+
 class Courses extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
     public static function tableName()
     {
         return 'courses';
@@ -76,9 +55,6 @@ class Courses extends \yii\db\ActiveRecord
 	return parent::find()->andWhere(['<>', 'is_status', 2]);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
@@ -92,9 +68,6 @@ class Courses extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
@@ -110,49 +83,31 @@ class Courses extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getBatches()
     {
         return $this->hasMany(Batches::className(), ['batch_course_id' => 'course_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getCreatedBy()
     {
         return $this->hasOne(User::className(), ['user_id' => 'created_by']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getUpdatedBy()
     {
         return $this->hasOne(User::className(), ['user_id' => 'updated_by']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuAdmissionMasters()
     {
         return $this->hasMany(StuAdmissionMaster::className(), ['stu_master_course_id' => 'course_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasters()
     {
         return $this->hasMany(StuMaster::className(), ['stu_master_course_id' => 'course_id']);
     }
 
-	/**
-	* @return all course
-	*/
 	public static function getStuCourse()
 	{
 		$dataTmp = Courses::find()->where(['is_status' => 0])->orderBy('course_name')->all();
