@@ -79,7 +79,7 @@ class Section extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['section_name', 'section_batch_id', 'created_at', 'created_by'], 'required', 'message' => ''],
+            [['section_name', 'section_course_id', 'created_at', 'created_by'], 'required', 'message' => ''],
             [['section_batch_id', 'intake', 'created_by', 'updated_by', 'is_status'], 'integer', 'message' => ''],
             [['created_at', 'updated_at'], 'safe', 'message' => ''],
             [['section_name'], 'string', 'max' => 50],
@@ -93,7 +93,7 @@ class Section extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-			'section_id' => Yii::t('course', 'Section ID'),
+		  'section_id' => Yii::t('course', 'Section ID'),
             'section_name' => Yii::t('course', 'Section Name'),
             'section_batch_id' => Yii::t('course', 'Section Batch'),
             'intake' => Yii::t('course', 'Intake'),
@@ -112,6 +112,13 @@ class Section extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Batches::className(), ['batch_id' => 'section_batch_id']);
     }
+
+
+    public function getSectionCourse()
+    {
+        return $this->hasOne(Courses::className(), ['course_id' => 'section_course_id']);
+    }
+    
 
     /**
      * @return \yii\db\ActiveQuery

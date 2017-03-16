@@ -155,6 +155,12 @@ class Batches extends \yii\db\ActiveRecord
         return $this->hasMany(Section::className(), ['section_batch_id' => 'batch_id']);
     }
 
+    public function getCourses()
+    {
+        return $this->hasMany(Courses::className(), ['section_course_id' => 'course_id']);
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

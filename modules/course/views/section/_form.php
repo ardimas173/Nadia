@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\course\models\Courses;
 use yii\helpers\Html;
 //use yii\widgets\ActiveForm;
 use yii\bootstrap\ActiveForm;
@@ -20,20 +21,28 @@ else
 
     <?php $form = ActiveForm::begin([
 			'id' => 'section-form',
-			'enableAjaxValidation' => true,
+			//'enableAjaxValidation' => true,
 			'fieldConfig' => [
 			    'template' => "{label}{input}{error}",
 			],
     ]); ?>
 
     <div class="col-xs-12 col-sm-12 col-lg-12">
-    <?= $form->field($model, 'section_name')->textInput(['maxlength' => 50, 'placeholder' => $model->getAttributeLabel('section_name')]) ?>
+        <?= $form->field($model, 'section_course_id')->dropDownList(ArrayHelper::map(Courses::find()->all(),'course_id','course_name'),['prompt'=>Yii::t('stu', '--- Select Course---')]); ?>
     </div>
 
    <div class="col-xs-12 col-lg-12 no-padding">
-    <div class="col-xs-12 col-sm-6 col-lg-6">
-    <?= $form->field($model, 'section_batch_id')->dropDownList(ArrayHelper::map(app\modules\course\models\Batches::find()->all(),'batch_id','batch_name'),['prompt'=>Yii::t('stu', '--- Select Batch ---')]); ?>
+
+
+
+
+   <div class="col-xs-12 col-sm-6 col-lg-6">
+       <?= $form->field($model, 'section_name')->textInput(['maxlength' => 50, 'placeholder' => $model->getAttributeLabel('section_name')]) ?>
+
     </div>
+
+
+
 
     <div class="col-xs-12 col-sm-6 col-lg-6">
     <?= $form->field($model, 'intake')->textInput(['placeholder' => $model->getAttributeLabel('intake')]) ?>
