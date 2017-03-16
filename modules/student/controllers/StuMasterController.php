@@ -115,9 +115,6 @@ class StuMasterController extends Controller
      */
     public function actionCreate()
     {
-
-	    $this->enableCsrfValidation = false;
-
 	    	$model = new StuMaster();
 		$info = new StuInfo();
 		$address = new StuAddress();

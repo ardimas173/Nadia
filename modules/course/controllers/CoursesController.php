@@ -54,6 +54,9 @@ use pheme\grid\actions\ToggleAction;
 
 class CoursesController extends Controller
 {
+
+    public $enableCsrfValidation = false;
+
     public function behaviors()
     {
         return [
