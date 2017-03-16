@@ -58,7 +58,8 @@ use app\models\Languages;
 
 class StuMasterController extends Controller
 {
-    public function behaviors()
+
+	public function behaviors()
     {
         return [
             'verbs' => [
@@ -114,7 +115,10 @@ class StuMasterController extends Controller
      */
     public function actionCreate()
     {
-		$model = new StuMaster();
+
+	    $this->enableCsrfValidation = false;
+
+	    	$model = new StuMaster();
 		$info = new StuInfo();
 		$address = new StuAddress();
 		$user =new User();
