@@ -38,7 +38,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/admin-l
 </div><!-- /.installation-box -->
 
 <div class="installation-footer"> 
-	<strong>Copyright &copy; <?= date('Y') ?> <a href="http://www.rudrasoftech.com">Rudra Softech</a>.</strong> All rights reserved.
+	<strong>Copyright &copy; <?= date('Y') ?> <a href="http://www.inbatam.com">Kuadran Teknologi Indonesia</a>.</strong> All rights reserved.
 </div>
 <?php $this->endBody() ?>
 </body>

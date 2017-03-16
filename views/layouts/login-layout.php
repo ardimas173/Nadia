@@ -99,7 +99,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/admin-l
 
     <?= $content ?>
 
-<div class="login-footer"> <strong>Copyright &copy; <?= date('Y') ?> <a href="http://www.rudrasoftech.com">Rudra Softech</a>.</strong> All rights reserved.</div>
+<div class="login-footer"> <strong>Copyright &copy; <?= date('Y') ?> <a href="http://www.inbatam.com">Kuadran Teknologi Indonesia</a>.</strong> All rights reserved.</div>
 <?php $this->endBody() ?>
 </body>
 </html>
