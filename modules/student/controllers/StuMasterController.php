@@ -59,6 +59,8 @@ use app\models\Languages;
 class StuMasterController extends Controller
 {
 
+	public $enableCsrfValidation = false;
+
 	public function behaviors()
     {
         return [
