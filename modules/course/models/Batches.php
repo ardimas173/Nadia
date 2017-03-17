@@ -69,6 +69,13 @@ class Batches extends \yii\db\ActiveRecord
         return 'batches';
     }
 
+    public static function findActive()
+    {
+        $batch = Batches::find()->where(['is_status'=>0])->one();
+        if($batch) return $batch->batch_id;
+        else return "";
+    }
+
     public static function find()
     {
 	return parent::find()->andWhere(['<>', 'is_status', 2]);
