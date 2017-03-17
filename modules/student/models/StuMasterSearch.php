@@ -37,6 +37,7 @@
  */
 namespace app\modules\student\models;
 
+use app\modules\course\models\Batches;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -74,7 +75,9 @@ class StuMasterSearch extends StuMaster
      */
     public function search($params)
     {
-        $query = StuMaster::find()->where(['is_status' => 0]);
+        $batchactive = Batches::findActive();
+
+        $query = StuMaster::find()->where(['is_status' => 0,'stu_master_batch_id'=>$batchactive]);
 	$query->joinWith(['stuMasterStuInfo', 'stuMasterUser']);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
