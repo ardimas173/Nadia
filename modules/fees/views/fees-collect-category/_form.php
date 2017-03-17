@@ -1,6 +1,8 @@
 <?php
 
+use app\modules\course\models\Courses;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
@@ -47,7 +49,7 @@ use yii\helpers\ArrayHelper;
     <div class="col-xs-12 col-sm-6 col-lg-6">
     <?= $form->field($model, 'fees_collect_end_date')->widget(yii\jui\DatePicker::className(),
                     [
-                        'clientOptions' =>[
+                          'clientOptions' =>[
         	                'dateFormat' => 'dd-mm-yyyy',
         	                'changeMonth'=> true,
         	                'changeYear'=> true,
@@ -75,14 +77,22 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <div class="col-xs-12 col-sm-6 col-lg-6">
-    <?php
-	if(Yii::$app->controller->action->id === 'create' ) {
-    		echo $form->field($model, 'fees_collect_batch_id[]')->dropDownList(ArrayHelper::map(app\modules\course\models\Batches::find()->where(['is_status' => 0])->all(),'batch_id','batch_name','batchCourse.course_name'),['multiple' => "multiple", 'class'=>'form-control', 'placeholder' => $model->getAttributeLabel('fees_collect_batch_id')]);
-	} else {
-		echo $form->field($model, 'fees_collect_batch_id')->dropDownList(ArrayHelper::map(app\modules\course\models\Batches::find()->where(['is_status' => 0])->all(),'batch_id','batch_name','batchCourse.course_name'),['class'=>'form-control', 'placeholder' => $model->getAttributeLabel('fees_collect_batch_id')]);
-	}
-    ?>
+        <?= $form->field($model, 'fees_collect_course_id')->dropDownList(ArrayHelper::map(Courses::find()->all(),'course_id','course_name'),[
+            'prompt'=>'Please Select',
+            'onchange'=>'
+				$.get("'.Url::toRoute('/student/dependent/studsection').'", { id: $(this).val() } )
+				.done(function( data ) {
+				$( "#'.Html::getInputId($model, 'fees_collect_section_id').'" ).html( data );
+				}
+			);'
+        ]) ?>
     </div>
+
+
+    <div class="col-xs-12 col-sm-6 col-lg-6">
+        <?= $form->field($model, 'fees_collect_section_id')->dropDownList([''=>Yii::t('stu', '--- Select Section ---')]); ?>
+    </div>
+
 
     <div class="form-group col-xs-12 col-sm-6 col-lg-4 no-padding edusecArLangCss">
 	<div class="col-xs-6">

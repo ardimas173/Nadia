@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\course\models\Courses;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -40,6 +41,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		'enableReplaceState' =>false,
 	    ]
 	); ?>
+
+	<!--	TODO-IB filter course not working-->
+
 	    <?= GridView::widget([
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
@@ -49,10 +53,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		    'section_name',
 		    [
-			      'label' => Yii::t('app','Batch'),
-			      'attribute' => 'section_batch_id',
-			      'value' => 'sectionBatch.batch_name',
-			      'filter' => ArrayHelper::map(app\modules\course\models\Batches::find()->all(), 'batch_id', 'batch_name')
+			      'label' => Yii::t('app','Course'),
+			      'attribute' => 'section_course_id',
+			      'value' => 'sectionCourse.course_name',
+			      'filter' => ArrayHelper::map(Courses::find()->all(), 'course_id', 'course_name')
 		    ],
 		    'intake',
 		     [

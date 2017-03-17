@@ -96,7 +96,7 @@ class StuMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['stu_master_stu_info_id', 'stu_master_course_id', 'stu_master_batch_id', 'stu_master_section_id', 'created_at', 'created_by'], 'required'],
+            [['stu_master_stu_info_id', 'stu_master_course_id',  'stu_master_section_id', 'created_at', 'created_by'], 'required'],
 	    	[['report_batch_id','report_section_id','report_city'],'integer'],	
             [['stu_master_stu_info_id', 'stu_master_user_id', 'stu_master_nationality_id', 'stu_master_category_id', 'stu_master_course_id', 'stu_master_batch_id', 'stu_master_section_id', 'stu_master_stu_status_id', 'stu_master_stu_address_id', 'created_by', 'updated_by', 'is_status'], 'integer', 'message' => ''],
             [['created_at', 'updated_at', 'stu_master_stu_status_id'], 'safe'],

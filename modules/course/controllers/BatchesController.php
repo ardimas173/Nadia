@@ -16,6 +16,9 @@ use pheme\grid\actions\ToggleAction;
 
 class BatchesController extends Controller
 {
+
+    public $enableCsrfValidation = false;
+
     public function behaviors()
     {
         return [

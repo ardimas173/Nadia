@@ -1,5 +1,6 @@
 <?php
 use \app\assets_b\AppAsset;
+use app\modules\course\models\Batches;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -26,6 +27,7 @@ endif;
 
 <header class="main-header header<?php // (Yii::$app->language == 'ar' ? 'main-header' : 'header')?>">
 
+
 <?= Html::a(Html::img(Yii::$app->request->baseUrl.'/images/edusec.png', ['width'=>'120px;', 'height'=>'22px']), Yii::$app->homeUrl, ['class' => 'logo', /*'style' => ((\Yii::$app->language == 'ar') ? 'padding: 14px 50px !important;' : '')*/]) ?>
 
 <nav class="navbar navbar-static-top" role="navigation">
@@ -36,6 +38,9 @@ endif;
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
 </a>
+
+
+
 <?php
 $empInfo = app\modules\employee\models\EmpInfo::find()->where(["LIKE", "emp_joining_date", date('Y-m-d')])->count();
 $stuList = app\modules\student\models\StuMaster::find()->where(["LIKE", "created_at", date('Y-m-d')])->count();
@@ -47,6 +52,9 @@ $countT = ((!Yii::$app->session->get('stu_id') && !Yii::$app->session->get('emp_
 $notifyCount = ($countT + count($eventsList));
 
 ?>
+
+    <h4 align="center">Year Academy Active : <?= Batches::getNameByID(Batches::findActive()); ?></h4>
+
 <div class="navbar-right">
 
 <ul class="nav navbar-nav">

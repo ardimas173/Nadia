@@ -38,6 +38,7 @@
 
 namespace app\modules\student\controllers;
 
+use app\modules\course\models\Batches;
 use Yii;
 use app\modules\student\models\StuMaster;
 use app\modules\student\models\StuInfo;
@@ -169,9 +170,11 @@ class StuMasterController extends Controller
 			//$user->save(false);
 			$address->save(false);
 			}
-
+			
+			
 			$model->stu_master_stu_address_id = $address->stu_address_id;
 			$model->stu_master_stu_info_id = $info->stu_info_id;
+			$model->stu_master_batch_id = Batches::findActive();
 			$model->stu_master_user_id = "";
 			$model->created_by = Yii::$app->getid->getId();
 			$model->created_at = new \yii\db\Expression('NOW()');

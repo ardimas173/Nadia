@@ -69,9 +69,23 @@ class Batches extends \yii\db\ActiveRecord
         return 'batches';
     }
 
+    public static function findActive()
+    {
+        $batch = Batches::find()->where(['is_status'=>0])->one();
+        if($batch) return $batch->batch_id;
+        else return "";
+    }
+
     public static function find()
     {
 	return parent::find()->andWhere(['<>', 'is_status', 2]);
+    }
+
+    public static function getNameByID($id)
+    {
+        $batch = Batches::find()->where(['is_status'=>0])->one();
+        if($batch) return $batch->batch_name;
+        else return "";
     }
 
    /* public static function defaultScope($query)
@@ -154,6 +168,12 @@ class Batches extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Section::className(), ['section_batch_id' => 'batch_id']);
     }
+
+    public function getCourses()
+    {
+        return $this->hasMany(Courses::className(), ['section_course_id' => 'course_id']);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

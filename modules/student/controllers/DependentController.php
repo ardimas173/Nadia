@@ -67,7 +67,7 @@ class DependentController extends Controller
 
 	public function actionStudsection($id){
 
-		$rows = \app\modules\course\models\Section::find()->where(['section_batch_id' => $id, 'is_status' => 0])->all();
+		$rows = \app\modules\course\models\Section::find()->where(['section_course_id' => $id, 'is_status' => 0])->all();
 	 
 		echo "<option value=''>".Yii::t('stu', '--- Select Section ---')."</option>";
 	 

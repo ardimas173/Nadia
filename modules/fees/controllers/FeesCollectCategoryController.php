@@ -115,11 +115,12 @@ class FeesCollectCategoryController extends Controller
         if ($model->load(Yii::$app->request->post()) && isset($_POST['FeesCollectCategory'])) {
 
 		$model->attributes = $_POST['FeesCollectCategory'];
-		for($i=0;$i<count($_REQUEST['FeesCollectCategory']['fees_collect_batch_id']);$i++) :
+
 			$model->fees_collect_category_id = NULL;
 			$model->isNewRecord = true;
-			$model->fees_collect_batch_id = $_POST['FeesCollectCategory']['fees_collect_batch_id'][$i];
+			$model->fees_collect_batch_id = Batches::findActive();
 			$model->fees_collect_name = $_POST['FeesCollectCategory']['fees_collect_name'];
+
 			$model->fees_collect_details = $_POST['FeesCollectCategory']['fees_collect_details'];
 			$model->fees_collect_start_date = Yii::$app->dateformatter->getDateFormat($_POST['FeesCollectCategory']['fees_collect_start_date']);
 			$model->fees_collect_end_date = Yii::$app->dateformatter->getDateFormat($_POST['FeesCollectCategory']['fees_collect_end_date']);
@@ -128,12 +129,14 @@ class FeesCollectCategoryController extends Controller
 			$model->created_at = new \yii\db\Expression('NOW()');
 
 			if($model->save()) {
-			      Yii::$app->session->setFlash('green-'.$i, '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> '.$_POST['FeesCollectCategory']['fees_collect_name'].' for <b>Batch: </b>'.Batches::findOne($_POST['FeesCollectCategory']['fees_collect_batch_id'][$i])->batch_name.' is created successfully');
+		//	      Yii::$app->session->setFlash('green-'.$i, '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> '.$_POST['FeesCollectCategory']['fees_collect_name'].' for <b>Batch: </b>'.Batches::findOne($_POST['FeesCollectCategory']['fees_collect_batch_id'][$i])->batch_name.' is created successfully');
+                     Yii::$app->session->setFlash('green', '<i class="fa fa-info-circle"></i> <b>Fees Category:</b> '.$_POST['FeesCollectCategory']['fees_collect_name'].' for <b>Batch: is created successfully');
 			} else {
-			      Yii::$app->session->setFlash('red-'.$i, '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> '.$_POST['FeesCollectCategory']['fees_collect_name'].' and <b>Batch: </b>'.Batches::findOne($_POST['FeesCollectCategory']['fees_collect_batch_id'][$i])->batch_name.' has already been taken.');
+                   //	      Yii::$app->session->setFlash('red-'.$i, '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> '.$_POST['FeesCollectCategory']['fees_collect_name'].' and <b>Batch: </b>'.Batches::findOne($_POST['FeesCollectCategory']['fees_collect_batch_id'][$i])->batch_name.' has already been taken.');
+                       Yii::$app->session->setFlash('red', '<i class="fa fa-warning"></i> The combination of <b>Fees Category:</b> '.$_POST['FeesCollectCategory']['fees_collect_name'].' and <b>Batch:  has already been taken.');
 			}
-				
-		endfor;
+
+
 	
 			return $this->redirect(['index']);
         } else {

@@ -147,27 +147,16 @@ $(function () {
 		[
                     'prompt'=>Yii::t('stu', '--- Select Course ---'),
                     'onchange'=>'
-                        $.get( "'.Url::toRoute('dependent/studbatch').'", { id: $(this).val() } )
+                        $.get( "'.Url::toRoute('dependent/studsection').'", { id: $(this).val() } )
                             .done(function( data ) {
-                                $( "#'.Html::getInputId($model, 'stu_master_batch_id').'" ).html( data );
+                                $( "#'.Html::getInputId($model, 'stu_master_section_id').'" ).html( data );
                             }
                         );
                     '
                 ]); ?>
     </div>
 
-    <div class="col-xs-12 col-sm-4 col-lg-4">
-    <?= $form->field($model, 'stu_master_batch_id')->dropDownList([],
-		[
-                    'prompt'=>Yii::t('stu', '--- Select Batch ---'),
-                    'onchange'=>'
-                        $.get( "'.Url::toRoute('dependent/studsection').'", { id: $(this).val() } )
-                            .done(function( data ) {
-                                $( "#'.Html::getInputId($model, 'stu_master_section_id').'" ).html( data );
-                            }
-                        );'
-                ]); ?>
-    </div>
+
     <div class="col-xs-12 col-sm-4 col-lg-4">
     	<?= $form->field($model, 'stu_master_section_id')->dropDownList([''=>Yii::t('stu', '--- Select Section ---')]); ?>
      </div>

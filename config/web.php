@@ -41,7 +41,8 @@ $config = [
 			'log',
 			[
 		        'class' => 'app\components\LanguageSelector',
-		        'supportedLanguages' => ['en', 'gu', 'fr', 'hi', 'es', 'ar','id'],
+				//'supportedLanguages' => ['en', 'gu', 'fr', 'hi', 'es', 'ar','id'],
+				'supportedLanguages' => ['en'],
 		    ],
 	],
     'components' => [

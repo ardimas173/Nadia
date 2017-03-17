@@ -38,12 +38,17 @@
 
 namespace app\modules\student\controllers;
 
+use app\modules\course\models\Batches;
 use yii\web\Controller;
 
 class DefaultController extends Controller
 {
     public function actionIndex()
     {
+
+	    $batchactive = Batches::findActive();
+
+
 	$fYearWiseAdm = [];
 	//Year wise admission count
 	$stuYearAdm = (new \yii\db\Query())
@@ -84,7 +89,7 @@ class DefaultController extends Controller
 		    ->join('JOIN', 'stu_info si', 'si.stu_info_stu_master_id = sm.stu_master_id')
 		    ->join('JOIN', 'courses cs', 'cs.course_id = sm.stu_master_course_id')
 		    ->join('JOIN', 'batches b', 'b.batch_id = sm.stu_master_batch_id')
-		    ->where(['sm.is_status' => '0'])
+		    ->where(['sm.is_status' => '0','stu_master_batch_id'=>$batchactive])
 		    ->orderBy('stu_master_id DESC')
 		    ->limit(10)
 		    ->all();
