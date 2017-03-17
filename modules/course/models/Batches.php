@@ -81,6 +81,13 @@ class Batches extends \yii\db\ActiveRecord
 	return parent::find()->andWhere(['<>', 'is_status', 2]);
     }
 
+    public static function getNameByID($id)
+    {
+        $batch = Batches::find()->where(['is_status'=>0])->one();
+        if($batch) return $batch->batch_name;
+        else return "";
+    }
+
    /* public static function defaultScope($query)
     {
         $query->andWhere(['is_status' => self::STATUS_OPEN]);

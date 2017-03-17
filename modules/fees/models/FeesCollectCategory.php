@@ -80,7 +80,7 @@ class FeesCollectCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fees_collect_name', 'fees_collect_batch_id', 'fees_collect_start_date', 'fees_collect_end_date', 'fees_collect_due_date', 'created_at', 'created_by'], 'required', 'message' => ''],
+            [['fees_collect_name', 'fees_collect_batch_id', 'fees_collect_course_id','fees_collect_section_id', 'fees_collect_start_date', 'fees_collect_end_date', 'fees_collect_due_date', 'created_at', 'created_by'], 'required', 'message' => ''],
             [['fees_collect_batch_id', 'created_by', 'updated_by', 'is_status'], 'integer'],
             [['fees_collect_start_date', 'fees_collect_end_date', 'fees_collect_due_date', 'created_at', 'updated_at'], 'safe'],
 	    [['fees_collect_batch_id'], 'integer',],
