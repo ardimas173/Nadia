@@ -142,9 +142,16 @@ EOF;
 	  </div>
 	</div>
 
-	 <div class="col-md-12 col-xs-12 col-sm-12">
-		<div class="col-md-3 col-xs-6 col-sm-3 edusec-profile-label edusecArLangCss"><?= $guardian->getAttributeLabel('guardian_qualification') ?></div>
-		<div class="col-md-9 col-xs-6 col-sm-9 edusec-profile-text"><?= $sd['guardian_qualification'] ?></div>
+	<div class="col-md-12 col-xs-12 col-sm-12">
+	  <div class="col-lg-6 col-sm-6 col-xs-12 no-padding">
+		<div class="col-lg-6 col-xs-6 edusec-profile-label edusecArLangCss"><?= $guardian->getAttributeLabel('guardian_qualification') ?></div>
+		<div class="col-lg-6 col-xs-6 edusec-profile-text"><?= $sd['guardian_qualification'] ?></div>
+		</div>
+		
+		<div class="col-lg-6 col-sm-6 col-xs-12 no-padding">
+		<div class="col-lg-6 col-xs-6 edusec-profile-label edusecArLangCss"><?= $guardian->getAttributeLabel('guardian_lastedu') ?></div>
+		<div class="col-lg-6 col-xs-6 edusec-profile-text"><?= $sd['guardian_lastedu'] ?></div>
+		</div>
 	 </div>
 
 

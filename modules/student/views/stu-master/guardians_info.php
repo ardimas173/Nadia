@@ -66,6 +66,11 @@ $(document).ready(function(){
     <div class="col-xs-12 col-sm-6 col-lg-6">
     <?= $form->field($guard, 'guardian_income')->textInput(['maxlength' => 50]) ?>
     </div>
+	
+	<div class="col-xs-12 col-sm-6 col-lg-6">
+    <?= $form->field($guard, 'guardian_lastedu')->textInput(['maxlength' => 50]) ?>
+    </div>
+	
 
     <div class="col-xs-12 col-sm-6 col-lg-6">
     <?= $form->field($guard, 'guardian_email')->textInput(['maxlength' => 65]) ?>
@@ -76,6 +81,7 @@ $(document).ready(function(){
     <div class="col-xs-12 col-sm-6 col-lg-6">
     <?= $form->field($guard, 'guardian_home_address')->textArea(['maxlength' => 255]) ?>
     </div>
+	
 
     <div class="col-xs-12 col-sm-6 col-lg-6">
     <?= $form->field($guard, 'guardian_office_address')->textArea(['maxlength' => 255]) ?>

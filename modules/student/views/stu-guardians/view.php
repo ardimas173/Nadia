@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'guardian_phone_no',
             'guardian_qualification',
             'guardian_occupation',
+			'guardian_lastedu',
             'guardian_income',
             'guardian_email:email',
             'guardian_home_address',

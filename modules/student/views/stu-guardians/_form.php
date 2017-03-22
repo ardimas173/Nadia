@@ -31,6 +31,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'guardian_qualification')->textInput(['maxlength' => 50]) ?>
 
     <?= $form->field($model, 'guardian_occupation')->textInput(['maxlength' => 50]) ?>
+	
+	 <?= $form->field($model, 'guardian_lastedu')->textInput(['maxlength' => 50]) ?>
 
     <?= $form->field($model, 'guardian_income')->textInput(['maxlength' => 50]) ?>
 

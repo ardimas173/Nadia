@@ -47,6 +47,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($guard, 'guardian_occupation')->textArea(['maxlength' => 50]) ?>
     </div>
    </div>
+   
+   
 
    <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
     <div class="col-xs-12 col-sm-6 col-lg-6">
@@ -66,7 +68,13 @@ use yii\widgets\ActiveForm;
     <div class="col-xs-12 col-sm-6 col-lg-6">
     <?= $form->field($guard, 'guardian_office_address')->textArea(['maxlength' => 255]) ?>
     </div>
-   </div>
+  
+   
+   
+   <div class="col-xs-12 col-sm-6 col-lg-6">
+    <?= $form->field($guard, 'guardian_lastedu')->textArea(['maxlength' => 50]) ?>
+    </div>
+	 </div>
 
     <div class="form-group col-xs-12 col-sm-6 col-lg-4 no-padding edusecArLangCss">
 	<div class="col-xs-6">
