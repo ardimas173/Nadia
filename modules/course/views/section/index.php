@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'attribute'=>'is_status',
 				'enableAjax' => false,
 				'filter'=>['1'=>'InActive', '0'=>'Active']
-		    ],	
+		    ],
 		    ['class' => 'app\components\CustomActionColumn'],
 		],
 	    ]); ?>

@@ -33,8 +33,6 @@ foreach ($datapemasukan as $pemasukan)
     $tablebaru->save(false);
 
 }
-
-
 $datatablebaru = Tablebaru::find()->all();
 
 ?>

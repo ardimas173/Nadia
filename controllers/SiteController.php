@@ -233,8 +233,8 @@ class SiteController extends Controller
 
 	public function actionLanguage()
 	{
-		if(isset($_REQUEST['language'])) {
-			$language = Yii::$app->request->post()['language'];
+
+			$language = 'en';
 			Yii::$app->language = $language;
 
 			$languageCookie = new \yii\web\Cookie([
@@ -244,8 +244,8 @@ class SiteController extends Controller
 			]);
 			\Yii::$app->response->cookies->add($languageCookie);
 			return $this->goBack();
-		}
-		return $this->renderAjax('language-form');
+
+
 	}
 
     public function actionAbout()

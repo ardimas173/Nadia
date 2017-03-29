@@ -124,7 +124,7 @@ class StuInfo extends \yii\db\ActiveRecord
             [['stu_photo'], 'file', 'extensions' => 'jpg, jpeg, gif, png', 'skipOnEmpty' => false,'checkExtensionByMimeType'=>false, 'on' => 'photo-upload'],
             [['stu_languages'], 'string', 'max' => 255],
             [['stu_email_id'], 'email'],
-            [['stu_email_id'], 'unique'],
+            //[['stu_email_id'], 'unique'],
             [['stu_dob'], 'checkDateDob', 'on' => 'import-stu'],
         ];
     }

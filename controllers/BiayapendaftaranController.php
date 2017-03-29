@@ -34,6 +34,7 @@ class BiayapendaftaranController extends Controller
     {
         $searchModel = new BiayapendaftaranSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
