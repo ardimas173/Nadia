@@ -11,6 +11,63 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url'=>['collect']];
 
 ?>
 
+
+
+
+<!--/////////////////////////////////-->
+
+
+<div class="box-info box box-solid view-item col-xs-12 col-lg-12 no-padding">
+	<div class="box-header with-border">
+		<h3 class="box-title"><i class="fa fa-search"></i> <?php echo Yii::t('fees', 'Select Criteria'); ?></h3>
+	</div>
+	<div class="box-body no-padding">
+		<?php $form = ActiveForm::begin([
+			'id' => 'fees-collect-form',
+			'fieldConfig' => [
+				'template' => "{label}{input}{error}",
+			],
+		]); ?>
+
+		<div class="col-md-6">
+			<?= $form->field($FccModel, 'fees_collect_course_id')->dropDownList(ArrayHelper::map(app\modules\course\models\Batches::find()->where(['is_status'=>0])->all(), 'batch_id','batch_name', 'batchCourse.course_name'),
+				[
+					'prompt'=>Yii::t('fees', 'Select Batch'),
+					'onchange'=>'
+				$.get("'.Url::toRoute('dependent/get-fees-category').'", { id: $(this).val() } )
+				.done(function( data ) {
+				$( "#'.Html::getInputId($FccModel, 'fees_collect_category_id').'" ).html( data );
+				}
+			);'
+				]);
+			$fccData = [];
+			if(!empty($FccModel->fees_collect_batch_id)) {
+				$fccData = ArrayHelper::map(app\modules\fees\models\FeesCollectCategory::find()->where(['is_status'=>0, 'fees_collect_batch_id'=>$FccModel->fees_collect_batch_id])->all(), 'fees_collect_category_id', 'fees_collect_name');
+			}
+			?>
+		</div>
+
+		<div class="col-md-6">
+			<?= $form->field($FccModel, 'fees_collect_category_id')->dropDownList($fccData,
+				[
+					'prompt'=>Yii::t('fees', 'Select Fees Category'),
+					'onchange'=>'this.form.submit()',
+				]); ?>
+		</div>
+
+		<?php ActiveForm::end(); ?>
+	</div>
+</div>
+
+
+
+
+
+<!--/////////////////////////////////-->
+
+
+
+
 <!---Start Select Fees Collection Category--->
 <div class="box-info box box-solid view-item col-xs-12 col-lg-12 no-padding">
     <div class="box-header with-border">
@@ -56,6 +113,18 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url'=>['collect']];
 <!---End Select Fees Collection Category--->
 
 <?php
+
+
+//	$FptModel = new FeesPaymentTransaction();
+//	$FccModel = new \app\modules\fees\models\FeesCollectCategory();
+//	$dispStatus = false;
+//	if(!empty($_POST['FeesCollectCategory']['fees_collect_category_id'])) {
+//		$dispStatus = true;
+//		$FccModel = \app\modules\fees\models\FeesCollectCategory::findOne($_POST['FeesCollectCategory']['fees_collect_category_id']);
+//	}
+
+
+
 
 if($dispStatus) :
 	$totalAmount = $gTotalAmount = $gpayFees = $gActualCollect = $payFees = $actualCollect = 0;
