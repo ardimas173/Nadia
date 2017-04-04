@@ -37,6 +37,7 @@
 
 namespace app\modules\fees\models;
 
+use app\modules\course\models\Section;
 use Yii;
 use app\modules\course\models\Batches;
 use app\models\User;
@@ -81,9 +82,9 @@ class FeesCollectCategory extends \yii\db\ActiveRecord
     {
         return [
             [['fees_collect_name', 'fees_collect_batch_id', 'fees_collect_course_id','fees_collect_section_id', 'fees_collect_start_date', 'fees_collect_end_date', 'fees_collect_due_date', 'created_at', 'created_by'], 'required', 'message' => ''],
-            [['fees_collect_batch_id', 'created_by', 'updated_by', 'is_status'], 'integer'],
+            [['fees_collect_batch_id','fees_collect_course_id','fees_collect_section_id', 'created_by', 'updated_by', 'is_status'], 'integer'],
             [['fees_collect_start_date', 'fees_collect_end_date', 'fees_collect_due_date', 'created_at', 'updated_at'], 'safe'],
-	    [['fees_collect_batch_id'], 'integer',],
+	       [['fees_collect_batch_id'], 'integer',],
             [['fees_collect_name'], 'string', 'max' => 70],
             [['fees_collect_details'], 'string', 'max' => 255],
             [['fees_collect_name', 'fees_collect_batch_id'], 'unique', 'targetAttribute' => ['fees_collect_name', 'fees_collect_batch_id'], 'message' => Yii::t('fees', 'The combination of Fees Category and Batch has already been taken.')],
@@ -125,6 +126,11 @@ class FeesCollectCategory extends \yii\db\ActiveRecord
     public function getFeesCollectBatch()
     {
         return $this->hasOne(Batches::className(), ['batch_id' => 'fees_collect_batch_id']);
+    }
+
+    public function getSection()
+    {
+        return $this->hasOne(Section::className(), ['section_id' => 'fees_collect_section_id']);
     }
 
     public function getUpdatedBy()
