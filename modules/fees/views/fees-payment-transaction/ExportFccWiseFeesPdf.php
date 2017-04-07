@@ -7,18 +7,26 @@ use yii\helpers\Html;
 </head>
 <body>
 <?php
+	$FccModel = $FccModel;
 	$totalAmount = $gTotalAmount = $gpayFees = $gActualCollect = $payFees = $actualCollect = 0;
-	$stuDataTmp = Yii::$app->db->createCommand("SELECT stu_master_id FROM stu_master WHERE stu_master_batch_id=:fcbId AND is_status=:status")
+	$stuDataTmp = Yii::$app->db->createCommand("SELECT stu_master_id FROM stu_master WHERE stu_master_batch_id=:fcbId AND is_status=:status and stu_master_course_id = :course_id and stu_master_section_id = :section_id")
 			->bindValues([
 					':fcbId' => $FccModel->fees_collect_batch_id,
 					':status' => 0,
+					':course_id' => $FccModel->fees_collect_course_id,
+					':section_id' => $FccModel->fees_collect_section_id,
 				])
 			->queryColumn();
 
-	$payFeesTmp = Yii::$app->db->createCommand("SELECT fees_pay_tran_stu_id FROM fees_payment_transaction WHERE fees_pay_tran_batch_id=:fcbId AND is_status=:status AND fees_pay_tran_collect_id=:fccId")
+	$payFeesTmp = Yii::$app->db->createCommand("SELECT fees_pay_tran_stu_id FROM fees_payment_transaction WHERE fees_pay_tran_batch_id=:fcbId AND is_status=:status AND
+						fees_pay_tran_course_id=:course_id AND
+						fees_pay_tran_section_id=:section_id AND
+						fees_pay_tran_collect_id=:fccId")
 			->bindValues([
 					':fcbId' => $FccModel->fees_collect_batch_id,
 					':status' => 0,
+					':course_id' => $FccModel->fees_collect_course_id,
+					':section_id' => $FccModel->fees_collect_section_id,
 					':fccId' => $FccModel->fees_collect_category_id,
 				])
 			->queryColumn();

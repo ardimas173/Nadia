@@ -47,6 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div> <!-- /. End Row-->
 <!---End display module link block--->
+
+
+<?php if (false): ?>
 <!---Start First Row Course Wise Collect Fees---> 
 <div class="row">
 <div class="col-sm-6">
@@ -192,7 +195,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <!---End First Row Student Branch Wise Total & Year Wise Admission--->
 
-
 <!--Start Paid/Due amount graph block--->
 <div class="row">
 <div class="col-md-12">
@@ -251,6 +253,9 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </div>
 <!--End Paid/Due amount graph block--->	
+<?php endif;?>
+
+
 
 <!---Start Second Row Recently Added Student List Block---> 
 <div class="row">

@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url'=>['collect']];
 ?>
 
 <div id="app">
-	<p>{{message}}</p>
 	<div class="box-info box box-solid view-item col-xs-12 col-lg-12 no-padding">
 		<div class="box-header with-border">
 			<h3 class="box-title"><i class="fa fa-search"></i> <?php echo Yii::t('fees', 'Select Criteria'); ?></h3>
