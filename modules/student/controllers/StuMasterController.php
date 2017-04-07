@@ -209,12 +209,12 @@ class StuMasterController extends Controller
      */
     public function actionUpdate( $sid, $tab )
     {
-        $model = $this->findModel($sid);
-	$info = StuInfo::findOne($model->stu_master_stu_info_id);
-	if(isset($_REQUEST['stu_guard_id']))
-	$guard = StuGuardians::find()->where(['guardia_stu_master_id' => $model->stu_master_id, 'stu_guardian_id' => $_REQUEST['stu_guard_id']])->one();
+        	$model = $this->findModel($sid);
+		$info = StuInfo::findOne($model->stu_master_stu_info_id);
+		if(isset($_REQUEST['stu_guard_id']))
+		$guard = StuGuardians::find()->where(['guardia_stu_master_id' => $model->stu_master_id, 'stu_guardian_id' => $_REQUEST['stu_guard_id']])->one();
 
-	$address = StuAddress::findOne($model->stu_master_stu_address_id);
+		$address = StuAddress::findOne($model->stu_master_stu_address_id);
 
 	if($tab == 'personal')
 	{
@@ -244,6 +244,7 @@ class StuMasterController extends Controller
                 'model' => $model, 'info' => $info,
             ]);
 	}
+
 	else if($tab == 'academic')
 	{
 		if($model->load(Yii::$app->request->post()) && $info->load(Yii::$app->request->post()))
@@ -265,6 +266,7 @@ class StuMasterController extends Controller
                 'model' => $model, 'info' => $info,
             ]);
 	}
+
 	else if($tab == 'guardians')
 	{
 		if (Yii::$app->request->isAjax && $guard->load(Yii::$app->request->post())) {

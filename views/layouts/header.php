@@ -165,7 +165,7 @@ if (Yii::$app->user->isGuest) {
 	if(isset($isStudent))
 	{
 		$stuMaster = app\modules\student\models\StuMaster::find()->andWhere(['stu_master_id' => $isStudent])->one();
-	        $stuInfo = app\modules\student\models\StuInfo::findOne($stuMaster->stu_master_stu_info_id);
+          $stuInfo = app\modules\student\models\StuInfo::findOne($stuMaster->stu_master_stu_info_id);
 		$Photo = $stuInfo->getStuPhoto($stuInfo->stu_photo);
 		$ProfileLink =  ['/student/stu-master/view', 'id' => $stuMaster->stu_master_id];
 		$linkStyle = 'display:block'; // for profile link class

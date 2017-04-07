@@ -85,7 +85,6 @@ class StuGuardians extends \yii\db\ActiveRecord
 	    [['created_at', 'updated_at'], 'safe'],
             [['guardian_qualification', 'guardian_occupation', 'guardian_income'], 'string', 'max' => 50],
             [['guardian_home_address', 'guardian_office_address'], 'string', 'max' => 255],
-            [['guardian_email'], 'unique']
         ];
     }
 
