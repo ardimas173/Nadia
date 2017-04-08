@@ -87,7 +87,7 @@ class StuMaster extends \yii\db\ActiveRecord
 
     public static function find()
     {
-	return parent::find()->andWhere(['<>', 'stu_master.is_status', 2]);
+	return parent::find()->andWhere(['<>', 'stu_master.is_status', 2])->andWhere(['stu_master_batch_id'=>Batches::findActive()]);
     }
 
     /**

@@ -61,17 +61,25 @@ class DefaultController extends Controller
 			->groupBy('fpt.fees_pay_tran_course_id')
 			->all();
 
-	$actFcc = \app\modules\fees\models\FeesCollectCategory::find()->where(['is_status'=>0,'fees_collect_batch_id'=>Batches::findActive()])->asArray()->all();
+	$actFcc = \app\modules\fees\models\FeesCollectCategory::find()->where(['is_status'=>0,
+		'fees_collect_batch_id'=>Batches::findActive(),
+	])->asArray()->all();
 	
 	foreach($actFcc as $v) {
-		$stuCount = \app\modules\student\models\StuMaster::find()->where(['is_status'=>0, 'stu_master_batch_id'=>Batches::findActive()])->count();
+		$stuCount = \app\modules\student\models\StuMaster::find()->where(['is_status'=>0,
+			'stu_master_batch_id'=>Batches::findActive(),
+			'stu_master_course_id'=>$v['fees_collect_course_id'],
+			'stu_master_section_id'=>$v['fees_collect_section_id']
+		])->count();
 		$fccTotal = \app\modules\fees\models\FeesCategoryDetails::getFeeCategoryTotal($v['fees_collect_category_id']);
 		$cateWisePaid+=($stuCount*$fccTotal); 
 	}
 
 	$paidTotal = (new \yii\db\Query())->from('fees_payment_transaction fpt')
 		     ->join('JOIN', 'fees_collect_category fcc', 'fpt.fees_pay_tran_collect_id = fees_collect_category_id')
-		    ->where(['fcc.is_status'=>0, 'fpt.is_status'=>0])
+		    ->where(['fcc.is_status'=>0,
+			    'fpt.is_status'=>0
+		    ])
 			->andWhere(['fpt.fees_pay_tran_batch_id'=>Batches::findActive()])
 		    ->sum('fpt.fees_pay_tran_amount');
 
