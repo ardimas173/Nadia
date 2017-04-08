@@ -1,4 +1,5 @@
 <?php
+use app\modules\course\models\Batches;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -380,7 +381,7 @@ EOF;
                                 <i class="fa fa-ellipsis-v"></i>
                             </span>
                             <span class="text"><?php echo $cl->course_name;?></span>
-                            <?php $stuCount = app\modules\student\models\StuMaster::find()->where(['stu_master_course_id' => $cl->course_id, 'is_status' => 0])->count();?>
+                            <?php $stuCount = app\modules\student\models\StuMaster::find()->where(['stu_master_course_id' => $cl->course_id, 'stu_master_batch_id'=>Batches::findActive(),'is_status' => 0])->count();?>
 			    <span class="notification-container <?= (Yii::$app->language == 'ar') ? 'pull-left' : 'pull-right'; ?> text-teal" title="<?= $stuCount; ?> Students"><i class="fa fa-users"></i><span class="label label-info notification-counter"><?= $stuCount; ?></span></span>
                         </li>
 		     <?php endforeach; ?>
