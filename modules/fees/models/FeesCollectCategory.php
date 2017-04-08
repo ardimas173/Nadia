@@ -73,7 +73,7 @@ class FeesCollectCategory extends \yii\db\ActiveRecord
    
     public static function find()
     {
-	return parent::find()->andWhere(['<>', 'is_status', 2]);
+	return parent::find()->andWhere(['<>', 'is_status', 2])->andWhere(['fees_collect_batch_id'=>Batches::findActive()]);
     }
     /**
      * @inheritdoc
