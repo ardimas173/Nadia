@@ -64,7 +64,7 @@ class DependentController extends Controller
 		$rows = FeesCollectCategory::find()->where(['is_status'=>0,
 			'fees_collect_course_id'=>$id,
 			'fees_collect_batch_id'=>$batchID,
-		])->all();
+		])->groupBy(['fees_collect_section_id'])->all();
 		echo Html::tag('option', Html::encode(Yii::t('fees','Select Course Section')), ['value'=>'']);
 		foreach($rows as $row)
 			echo Html::tag('option',Html::encode($row->section->section_name), ['value'=>$row->fees_collect_section_id]);

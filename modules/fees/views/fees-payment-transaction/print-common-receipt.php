@@ -1,4 +1,4 @@
-<?php 
+<?php
 use yii\helpers\Html;
 ?>
 <html>
@@ -24,7 +24,7 @@ use yii\helpers\Html;
 		</td>
 	</tr>
 	<tr>
-		<th colspan=3 class="border-none"> 
+		<th colspan=3 class="border-none">
 			<?php $paidAmount = $model->getStuTotalPayFees($_GET['sid'], $_GET['fcid']);
 			      $totalAmount = \app\modules\fees\models\FeesCategoryDetails::getFeeCategoryTotal($_GET['fcid']);
 			      echo ($paidAmount<$totalAmount) ? Yii::t('fees', "Partial Payment Fees Receipt") : Yii::t('fees', "Fees Receipt");?>
@@ -60,10 +60,10 @@ use yii\helpers\Html;
 				<th><?php echo Yii::t('fees', 'Fees Details'); ?></th>
 				<th><?php echo Yii::t('fees', 'Amount'); ?></th>
 			</tr>
-			<?php 
+			<?php
 			foreach($feesDetails as $key=>$value) {
 				echo '<tr>';
-				echo '<td class="text-center">'.($key+1).'</td>';	
+				echo '<td class="text-center">'.($key+1).'</td>';
 				echo '<td class="text-center">'.$value['fees_details_name'].'</td>';
 				echo '<td class="text-center">'.$value['fees_details_amount'].'</td>';
 				echo '</tr>';
@@ -123,7 +123,7 @@ use yii\helpers\Html;
 		</td>
 	</tr>
 	<!----------End footer signation------------>
-	
+
 
 </table>
 </div>

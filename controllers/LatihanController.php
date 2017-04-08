@@ -302,6 +302,12 @@ class LatihanController extends Controller
 
     }
 
+    public function actionTest()
+    {
+        return $this->render('test');
+    }
+
+
     public function actionPendaftaran20162017()
     {
         $dbpp = Pendaftaran20162017::find()->all();

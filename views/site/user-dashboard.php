@@ -136,10 +136,10 @@ yii\bootstrap\Modal::end();
             <div class="small-box bg-red">
                 <div class="inner">
                     <h3>
-                        <?= app\modules\course\models\Batches::find()->where(['is_status' => 0])->count(); ?>
+                        <?= app\modules\course\models\Batches::find()->count(); ?>
                     </h3>
                     <p>
-                        <?php echo Yii::t('app', 'Active Batches') ?>
+                        <?php echo Yii::t('app', 'Total Batches') ?>
                     </p>
                 </div>
                 <div class="icon">

@@ -55,7 +55,7 @@ class DefaultController extends Controller
 		    ->select(["CONCAT(DATE_FORMAT(si.stu_admission_date, '%Y'), ' (', COUNT(sm.stu_master_id), ')') AS 'yearDisp'", 'DATE_FORMAT(si.stu_admission_date, "%Y") as "year"']) 
 		    ->from('stu_master sm')
 		    ->join('JOIN', 'stu_info si', 'si.stu_info_stu_master_id = sm.stu_master_id')
-		    ->where(['sm.is_status' => '0'])
+		    ->where(['sm.is_status' => '0','sm.stu_master_batch_id'=>$batchactive])
 		    ->groupBy(['DATE_FORMAT(si.stu_admission_date, "%Y")'])
 		    ->orderBy('YEAR(si.stu_admission_date) DESC')
 		    ->limit('3')
@@ -66,7 +66,9 @@ class DefaultController extends Controller
 		for($i=1; $i<=12; $i++) {
 		    $monthCountTmp = (new \yii\db\Query())->from('stu_master sm')
 			->join('JOIN', 'stu_info si', 'si.stu_info_stu_master_id = sm.stu_master_id')
-			->where(['YEAR(si.stu_admission_date)' => $v['year'], 'MONTH(si.stu_admission_date)' => $i, 'is_status'=>0])->count();
+			->where(['YEAR(si.stu_admission_date)' => $v['year'],
+				'sm.stu_master_batch_id'=>$batchactive,
+				'MONTH(si.stu_admission_date)' => $i, 'is_status'=>0])->count();
 		    $mothCount[] = $monthCountTmp;
 		}
 		$yearResults = ['name'=>$v['yearDisp'], 'data'=>$mothCount];
@@ -78,7 +80,7 @@ class DefaultController extends Controller
 		    ->select(["CONCAT(cs.course_name, ' (', COUNT( stu_master_id ), ')') AS '0'", 'COUNT(stu_master_id) AS "1"']) 
 		    ->from('stu_master sm')
 		    ->join('JOIN', 'courses cs', 'cs.course_id = sm.stu_master_course_id')
-		    ->where(['sm.is_status' => '0', 'cs.is_status' => '0'])
+		    ->where(['sm.is_status' => '0', 'cs.is_status' => '0','sm.stu_master_batch_id'=>$batchactive])
 		    ->groupBy('stu_master_course_id')
 		    ->all();
 

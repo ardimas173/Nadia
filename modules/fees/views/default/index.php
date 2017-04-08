@@ -1,5 +1,6 @@
-<?php 
-use yii\helpers\Html; 
+<?php
+use app\modules\course\models\Batches;
+use yii\helpers\Html;
 use miloschuman\highcharts\Highcharts;
 use yii\web\JsExpression;
 
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	        <span class="edusec-link-box-icon bg-teal"><i class="fa fa-cog"></i></span>
 	        <div class="edusec-link-box-content">
 	          <span class="edusec-link-box-text"><?= Html::a(Yii::t('fees', 'Fees Category'), ['/fees/fees-collect-category']);?></span>
-	          <span class="edusec-link-box-number"><?= app\modules\fees\models\FeesCollectCategory::find()->andWhere(['is_status'=>0])->count(); ?></span>
+	          <span class="edusec-link-box-number"><?= app\modules\fees\models\FeesCollectCategory::find()->andWhere(['is_status'=>0,'fees_collect_batch_id'=>Batches::findActive()])->count(); ?></span>
 		 <span class="edusec-link-box-desc"></span>
 		  <span class="edusec-link-box-bottom"><?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('fees', 'Create New'), ['/fees/fees-collect-category/create']); ?></span>
 	        </div><!-- /.info-box-content -->
@@ -49,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!---End display module link block--->
 
 
-<?php if (false): ?>
+<?php if (true): ?>
 <!---Start First Row Course Wise Collect Fees---> 
 <div class="row">
 <div class="col-sm-6">
@@ -256,7 +257,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php endif;?>
 
 
-
+<?php if(true): ?>
 <!---Start Second Row Recently Added Student List Block---> 
 <div class="row">
 <div class="col-md-12">
@@ -312,3 +313,4 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </div>
 <!---End Recently Student Added Block--->
+<?php endif;?>
