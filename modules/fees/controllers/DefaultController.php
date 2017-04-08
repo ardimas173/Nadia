@@ -100,7 +100,7 @@ class DefaultController extends Controller
 		    ->join('JOIN', 'batches bt', 'bt.batch_id = fcc.fees_collect_batch_id')
 		    ->where(['fcc.is_status' => '0','fcc.fees_collect_batch_id'=>Batches::findActive()])
 		    ->orderBy('fcc.fees_collect_category_id DESC')
-		    ->limit('10')
+		    //->limit('10')
 		    ->all();
 	$fccTotal = $fccPaid = 0;
 	foreach($fcWiseDetails as $k=>$v) {
@@ -134,7 +134,7 @@ class DefaultController extends Controller
 		    ->join('JOIN', 'stu_info si', 'si.stu_info_stu_master_id = fpt.fees_pay_tran_stu_id')
 		    ->where(['fpt.is_status' => '0','fpt.fees_pay_tran_batch_id'=>Batches::findActive()])
 		    ->orderBy('fees_pay_tran_id DESC')
-		    ->limit(10)
+		    //->limit(10)
 		    ->all();
 
 	    
