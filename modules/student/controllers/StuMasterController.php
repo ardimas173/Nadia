@@ -81,6 +81,7 @@ class StuMasterController extends Controller
     {
         $searchModel = new StuMasterSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+	    $dataProvider->pagination = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
