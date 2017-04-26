@@ -51,6 +51,11 @@ use yii\web\Controller;
 class LatihanController extends Controller
 {
 
+    public function actionLima()
+    {
+        return$this->render('lima');
+    }
+
     public function actionPertama()
     {
         return $this->render('pertama');

@@ -1,42 +1,53 @@
-<script src="https://unpkg.com/vue"></script>
+<?php
 
 
-
-<div id="app">
-
-    <input type="text" v-model="message">
-    <input type="text" v-model="messagedua">
-
-    <p>{{message}}</p>
-</div>
-
-
-    <todo-item></todo-item>
+?>
 
 
 
 
-<script>
+
+<?php
 
 
-    Vue.component('todo-item', {
-        // The todo-item component now accepts a
-        // "prop", which is like a custom attribute.
-        // This prop is called todo.
-        props: ['todo'],
-        template: '<li>{{ todo.text }}</li>'
-    })
+use app\models\Journal;
+
+$jurnals = Journal::find()->where(['!=','debit',0])->all();
+
+?>
+
+<table class="table table-bordered">
+    <tr>
+        <td>ID</td>
+        <td>Descripotion</td>
+        <td>Tgl</td>
+        <td>Debit</td>
+        <td>Kredit</td>
+    </tr>
+
+<?php foreach ($jurnals as $jurnal):?>
+
+    <tr>
+        <td><?= $jurnal->journal_id ?></td>
+        <td><?= $jurnal->journal_description ?></td>
+        <td><?= $jurnal->journal_date ?></td>
+        <td><?= $jurnal->debit ?></td>
+        <td><?= $jurnal->credit ?></td>
+    </tr>
 
 
-    Vue.component('todo-item', {
-        template: '<li>This is a todo</li>'
-    })
+<?php endforeach;?>
 
-    var app = new Vue({
-        el:'#app',
-        data:{
-            message:'test',
-            messagedua:'dua'
-        }
-    })
-</script>
+
+
+
+</table>
+
+
+<?php
+
+
+$query = (new \yii\db\Query())->from('journal')->where(['!=','credit',0]);
+$sum = $query->sum('credit');
+echo $sum;
+
