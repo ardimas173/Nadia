@@ -37,14 +37,12 @@
  */
 
 namespace app\modules\fees\controllers;
+use app\models\PaymentForm;
 use Yii;
 use app\modules\fees\models\FeesPaymentTransaction;
-use app\modules\fees\models\FeesPaymentTransactionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\Json;
-use yii\widgets\ActiveForm;
 use mPDF;
 
 class FeesPaymentTransactionController extends Controller
@@ -69,27 +67,40 @@ class FeesPaymentTransactionController extends Controller
         ]);
     }
 
-    /**
-     * Display student list based on fees category batch.
-     * @return mixed
-     */
-    public function actionCollect()
-    {
-        $FptModel = new FeesPaymentTransaction();
+	public function actionCollect()
+	{
+		$FptModel = new FeesPaymentTransaction();
 		$FccModel = new \app\modules\fees\models\FeesCollectCategory();
 		$dispStatus = false;
-        if(!empty($_POST['FeesCollectCategory']['fees_collect_category_id'])) {
+		if(!empty($_POST['FeesCollectCategory']['fees_collect_category_id'])) {
 			$dispStatus = true;
 			$FccModel = \app\modules\fees\models\FeesCollectCategory::findOne($_POST['FeesCollectCategory']['fees_collect_category_id']);
-        }
+		}
 
-	return $this->render('collect', [
-		'FptModel' => $FptModel,
-		'FccModel' => $FccModel,
-		'dispStatus'=> $dispStatus,
-	]);
-        
-    }
+		return $this->render('collect', [
+			'FptModel' => $FptModel,
+			'FccModel' => $FccModel,
+			'dispStatus'=> $dispStatus,
+		]);
+
+	}
+
+	public function actionCollecttwo()
+	{
+		$model = new PaymentForm();
+
+		if(Yii::$app->request->isPost)
+		{
+			$model->load(Yii::$app->request->post());
+			return $this->render('collect2',[
+				'model'=>$model
+			]);
+
+		}
+		return $this->render('collect2',[
+			'model'=>$model
+		]);
+	}
 
     /**
      * Generate PDF file based on fees collection category wise.

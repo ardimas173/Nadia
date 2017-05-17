@@ -37,6 +37,7 @@
  */
 
 namespace app\modules\fees\controllers;
+use app\models\Paymentpackage;
 use app\modules\course\models\Batches;
 use app\modules\course\models\Section;
 use app\modules\fees\models\FeesCollectCategory;
@@ -56,11 +57,23 @@ class DependentController extends Controller
 	}
 
 
+	public function actionGetPackage($courseid)
+	{
+
+		$batchID = Batches::findActive();
+		$rows = Paymentpackage::find()->where(['batch_id'=>$batchID])->andWhere(['course_id'=>$courseid])->all();
+		echo Html::tag('option', Html::encode(Yii::t('fees','Select Course Section')), ['value'=>'']);
+
+		foreach($rows as $row)
+			echo Html::tag('option',$row->payment_package_name, ['value'=>$row->payment_package_id]);
+			//echo Html::tag('option',Html::encode($row->section->section_name), ['value'=>$row->fees_collect_section_id]);
+	}
+
 	public function actionGetCourseSection($id)
 	{
 
 		$batchID = Batches::findActive();
-		
+
 		$rows = FeesCollectCategory::find()->where(['is_status'=>0,
 			'fees_collect_course_id'=>$id,
 			'fees_collect_batch_id'=>$batchID,

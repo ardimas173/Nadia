@@ -154,6 +154,7 @@ $config = [
 	],
     'params' => $params,
     'modules' => [
+     'payment' => 'app\modules\payment\Module',
 	'course' => 'app\modules\course\CourseModule',
 	'student' => 'app\modules\student\StudentModule',
 	'employee' => 'app\modules\employee\EmployeeModule',
