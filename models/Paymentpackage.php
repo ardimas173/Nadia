@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\course\models\Batches;
 use Yii;
 
 /**
@@ -14,6 +15,13 @@ use Yii;
  */
 class Paymentpackage extends \yii\db\ActiveRecord
 {
+
+    public function getBatch()
+    {
+        return $this->hasOne(Batches::className(),['batch_id'=>'batch_id']);
+    }
+
+
     /**
      * @inheritdoc
      */

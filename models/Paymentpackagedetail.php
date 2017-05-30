@@ -25,6 +25,14 @@ class Paymentpackagedetail extends \yii\db\ActiveRecord
         return $this->hasOne(Paymentpackage::className(),['payment_package_id'=>'payment_package_id']);
     }
 
+    public static function getAmountByID($comp_id,$category_id)
+    {
+        $result = Paymentpackagedetail::find()->where(['payment_component_id'=>$comp_id,'payment_package_id'=>$category_id])->one();
+        if($result)
+            return $result->amount;
+        else return 0;
+    }
+
 
     /**
      * @inheritdoc

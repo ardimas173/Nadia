@@ -76,9 +76,7 @@ use app\models\User;
  */
 class StuMaster extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
+
     public $report_batch_id,$report_section_id,$report_city,$importFile;
     public static function tableName()
     {
@@ -90,9 +88,7 @@ class StuMaster extends \yii\db\ActiveRecord
 	return parent::find()->andWhere(['<>', 'stu_master.is_status', 2])->andWhere(['stu_master_batch_id'=>Batches::findActive()]);
     }
 
-    /**
-     * @inheritdoc
-     */
+
     public function rules()
     {
         return [
@@ -105,10 +101,7 @@ class StuMaster extends \yii\db\ActiveRecord
 			[['importFile'], 'file', 'extensions' => 'xlsx, csv', 'skipOnEmpty' => false, 'checkExtensionByMimeType'=>false, 'uploadRequired' => Yii::t('stu', 'Please select file'), 'on' => 'import-student'],
         ];
     }
-	    
-    /**
-     * @inheritdoc
-     */
+
     public function attributeLabels()
     {
         return [
@@ -134,17 +127,11 @@ class StuMaster extends \yii\db\ActiveRecord
         ];
     }
 
-	/*
-	* get Import file path
-	*/
-	public function getImportFilePath()
+    public function getImportFilePath()
     {
     	return Yii::getAlias('@webroot').'/data/import_files/student_files/';
     }
-    
-	/*
-	* save import file
-	*/
+
     public function saveImportFile()
     {
 		if ($this->validate(['importFile'])) {
@@ -159,113 +146,75 @@ class StuMaster extends \yii\db\ActiveRecord
 		return false;
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuDocs()
     {
         return $this->hasMany(StuDocs::className(), ['stu_docs_stu_master_id' => 'stu_master_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuGuardians()
     {
         return $this->hasMany(StuGuardians::className(), ['guardia_stu_master_id' => 'stu_master_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuInfos()
     {
         return $this->hasMany(StuInfo::className(), ['stu_info_stu_master_id' => 'stu_master_id']);
     }
+    public function getStuInfo()
+    {
+        return $this->hasOne(StuInfo::className(), ['stu_info_stu_master_id' => 'stu_master_id']);
+    }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getUpdatedBy()
     {
         return $this->hasOne(User::className(), ['user_id' => 'updated_by']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterStuInfo()
     {
         return $this->hasOne(StuInfo::className(), ['stu_info_id' => 'stu_master_stu_info_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterUser()
     {
         return $this->hasOne(\app\models\User::className(), ['user_id' => 'stu_master_user_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterNationality()
     {
         return $this->hasOne(\app\models\Nationality::className(), ['nationality_id' => 'stu_master_nationality_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterCategory()
     {
         return $this->hasOne(StuCategory::className(), ['stu_category_id' => 'stu_master_category_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterCourse()
     {
         return $this->hasOne(\app\modules\course\models\Courses::className(), ['course_id' => 'stu_master_course_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterBatch()
     {
         return $this->hasOne(\app\modules\course\models\Batches::className(), ['batch_id' => 'stu_master_batch_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterSection()
     {
         return $this->hasOne(\app\modules\course\models\Section::className(), ['section_id' => 'stu_master_section_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterStuStatus()
     {
         return $this->hasOne(StuStatus::className(), ['stu_status_id' => 'stu_master_stu_status_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getStuMasterStuAddress()
     {
         return $this->hasOne(StuAddress::className(), ['stu_address_id' => 'stu_master_stu_address_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getCreatedBy()
     {
         return $this->hasOne(User::className(), ['user_id' => 'created_by']);

@@ -40,6 +40,7 @@ namespace app\modules\fees\controllers;
 use app\models\PaymentForm;
 use Yii;
 use app\modules\fees\models\FeesPaymentTransaction;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -47,7 +48,7 @@ use mPDF;
 
 class FeesPaymentTransactionController extends Controller
 {
-    public function behaviors()
+    	public function behaviors()
     {
         return [
             'verbs' => [
@@ -60,7 +61,7 @@ class FeesPaymentTransactionController extends Controller
         ];
     }
 
-    public function actionView($id)
+    	public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -85,28 +86,24 @@ class FeesPaymentTransactionController extends Controller
 
 	}
 
-	public function actionCollecttwo()
+	public function actionCollecttwo($comp=0,$course=0,$category=0)
 	{
 		$model = new PaymentForm();
 
 		if(Yii::$app->request->isPost)
 		{
 			$model->load(Yii::$app->request->post());
-			return $this->render('collect2',[
-				'model'=>$model
-			]);
+			$comp=$model->category;
 
+			$this->redirect(Url::current(['comp'=>$comp,'course'=>$model->course,'category'=>$model->category]));
 		}
+
 		return $this->render('collect2',[
 			'model'=>$model
 		]);
 	}
 
-    /**
-     * Generate PDF file based on fees collection category wise.
-     * @return Export PDF Data
-     */
-    public function actionExportFccWiseFeesPdf($fccid)
+    	public function actionExportFccWiseFeesPdf($fccid)
     {
 	$FptModel = new FeesPaymentTransaction();
 	$FccModel = \app\modules\fees\models\FeesCollectCategory::findOne($fccid);
@@ -118,12 +115,7 @@ class FeesPaymentTransactionController extends Controller
 	return Yii::$app->pdf->exportData($FccModel->fees_collect_name.' Report', $fileName,$html);
     }
 
-    /**
-     * Take Fees based on fees category wise & student wise.
-     * @param integer $sid, $fcid
-     * @return mixed
-     */
-    public function actionPayFees($sid, $fcid)
+    	public function actionPayFees($sid, $fcid)
     {
         $model = new FeesPaymentTransaction();
 	$stuData = \app\modules\student\models\StuMaster::findOne($sid);
@@ -156,12 +148,7 @@ class FeesPaymentTransactionController extends Controller
         
     }
 
-    /**
-     * Update Fees taken details for individual receipt wise.
-     * @param integer $id
-     * @return mixed
-     */ 
-    public function actionUpdate($id)
+    	public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 	$stuData = \app\modules\student\models\StuMaster::findOne($model->fees_pay_tran_stu_id);
@@ -187,12 +174,7 @@ class FeesPaymentTransactionController extends Controller
             ]);
     }
 
-   /**
-     * Display Fees category wise & student wise fees receipt.
-     * @param integer $sid, $fcid
-     * @return mixed
-     */ 
-    public function actionPrintCommonReceipt($sid, $fcid)
+    	public function actionPrintCommonReceipt($sid, $fcid)
     {
 		$model = new FeesPaymentTransaction();
 		$stuData = \app\modules\student\models\StuMaster::findOne($sid);
@@ -215,13 +197,7 @@ class FeesPaymentTransactionController extends Controller
 		$mpdf->Output($title.'.pdf', "I");
     }
 
-   /**
-     * Display Individual Student Fees Data.
-     * If student is login, the fees data display based on student login id other wise request id.
-     * @param integer $sid
-     * @return mixed
-     */     
-    public function actionStuFeesData()
+    	public function actionStuFeesData()
     {
 	if(Yii::$app->session->get('stu_id'))
 		$sid = Yii::$app->session->get('stu_id');
@@ -240,14 +216,8 @@ class FeesPaymentTransactionController extends Controller
 		'FccModel'=> $FccModel,
             ]);
     } 
-    
-   /**
-     * Deletes an existing FeesPaymentTransaction model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */ 
-    public function actionDelete($id)
+
+    	public function actionDelete($id)
     {
 	$model = $this->findModel($id);
 	$model->is_status = 2;
@@ -262,14 +232,7 @@ class FeesPaymentTransactionController extends Controller
 	}
     }
 
-    /**
-     * Finds the FeesPaymentTransaction model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return FeesPaymentTransaction the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */   
-    protected function findModel($id)
+    	protected function findModel($id)
     {
         if (($model = FeesPaymentTransaction::findOne($id)) !== null) {
             return $model;

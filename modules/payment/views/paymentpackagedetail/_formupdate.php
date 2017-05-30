@@ -25,14 +25,13 @@ if(isset($_GET['paymentpackageid']))
 
     $checkdetailpayment = Paymentpackagedetail::find()->select('payment_package_id')->distinct()->all();
     $checkdetailpayment = ArrayHelper::getColumn($checkdetailpayment, 'payment_package_id');
-
+    $components = Paymentpackagedetail::find()
+        ->where(['payment_package_id'=>$model->payment_package_id])
+        ->orderBy(['payment_component_id'=>SORT_ASC])->all();
     ?>
 
-    <?= $form->field($model, 'payment_package_id')->dropDownList(ArrayHelper::map(Paymentpackage::find()
-        ->where(['not in','payment_package_id',$checkdetailpayment])
-        ->all(),'payment_package_id','payment_package_name'),['prompt'=>'Please Select']) ?>
 
-    <?php $component = Paymentcomponent::find()->all(); ?>
+    <h2>Payment Package Name : <?= $model->package->payment_package_name; ?></h2>
 
 
     <table class="table table-bordered">
@@ -41,12 +40,15 @@ if(isset($_GET['paymentpackageid']))
             <th>Amount</th>
         </tr>
 
-    <?php foreach ($component as $comp) : ?>
+    <?php foreach ($components as $comp):?>
+
         <tr>
-            <td><?= $comp->payment_component_name ?></td>
-            <td><input type="number" required name="amount[<?= $comp->payment_component_id ?>]"></td>
+            <td><?=$comp->component->payment_component_name?></td>
+            <td><input type="text" value="<?=$comp->amount?>" name="amount[<?=$comp->payment_package_detail_id?>]"></td>
         </tr>
-    <?php endforeach; ?>
+
+    <?php endforeach;?>
+
 
     </table>
 
@@ -63,17 +65,15 @@ if(isset($_GET['paymentpackageid']))
 <?php
 if(Yii::$app->request->isPost)
 {
-    foreach ($component as $comp)
-    {
-        $paymentdetail = new Paymentpackagedetail();
-        $paymentdetail->payment_package_id = $_POST['Paymentpackagedetail']['payment_package_id'];
-        $paymentdetail->payment_component_id = $comp->payment_component_id;
-        $paymentdetail->amount = $_POST['amount'][$comp->payment_component_id] ;
-        $paymentdetail->save(false);
+    $paymentpackagedetails = $_POST['amount'];
+    foreach ($paymentpackagedetails as $key=>$val){
+        $ppd = Paymentpackagedetail::findOne($key);
+        $ppd->amount = $val;
+        $ppd->save(false);
+//        echo $ppd->payment_package_detail_id .'-'.$ppd->amount;
+//        echo '<br />';
     }
-
     $this->context->redirect('index');
-
 }
 
 

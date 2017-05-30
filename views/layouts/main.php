@@ -24,6 +24,9 @@ if (Yii::$app->controller->action->id === 'login') {
     <?php $this->beginPage() ?>
     <!DOCTYPE html>
     <html lang="<?= Yii::$app->language ?>">
+
+    <script src="<?= Yii::getAlias('@web/js/vue.js') ?>"></script>
+
     <head>
         <meta charset="<?= Yii::$app->charset ?>"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">

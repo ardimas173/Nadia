@@ -27,6 +27,13 @@ class PaymentpackageController extends Controller
         ];
     }
 
+
+    public function actionResetdata()
+    {
+        $sql = 'truncate table payment_package_detail';
+        Yii::$app->db->createCommand($sql)->execute();
+    }
+
     /**
      * Lists all Paymentpackage models.
      * @return mixed
