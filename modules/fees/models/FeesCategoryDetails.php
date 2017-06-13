@@ -57,7 +57,7 @@ use app\models\User;
  * @property FeesCollectCategory $feesDetailsCategory
  * @property Users $createdBy
  */
-class eFeesCategoryDetails extends \yii\db\ActiveRecorde
+class FeesCategoryDetails extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc

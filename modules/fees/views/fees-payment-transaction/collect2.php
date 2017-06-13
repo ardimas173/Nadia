@@ -66,8 +66,6 @@ if(isset($_GET['course']) && isset($_GET['category']) ) {
     <div class="form-group">
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
     </div>
-    <?php ActiveForm::end(); ?>
-
 
     <?php if($isGood):?>
         <?php $students = StuMaster::find()->where(['stu_master_course_id'=>$course])
@@ -79,31 +77,33 @@ if(isset($_GET['course']) && isset($_GET['category']) ) {
                     <td><a href="<?= Url::current(['comp'=>$component->payment_component_id]) ?>"><?=$component->payment_component_name?></a></td>
                 <?php endforeach;?>
             </tr></table>
-        <table class="table table-bordered">
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Kelas</th>
-                <th>Section</th>
-                <th>Bayaran</th>
-                <th>Sudah dibayar</th>
-                <th>Kekurangan</th>
-            </tr>
-        <?php foreach ($students as $stu):?>
-            <tr>
-                <td><?= $urut ?></td>
-                <td><?= $stu->stuInfo->stu_first_name ?></td>
-                <td><?= $stu->stuMasterCourse->course_name ?></td>
-                <td><?= $stu->stuMasterSection->section_name ?></td>
-                <td><?= Paymentpackagedetail::getAmountByID($comp,$category) ?></td>
-                <td>0</td>
-                <td>12</td>
-            </tr>
-            <?php $urut++;?>
-        <?php endforeach;?>
-        </table>
-    <?php endif;?>
 
+            <table class="table table-bordered">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Kelas</th>
+                    <th>Section</th>
+                    <th>Bayaran</th>
+                    <th>Sudah dibayar</th>
+                    <th>Kekurangan</th>
+                </tr>
+                <?php foreach ($students as $stu):?>
+                    <tr>
+                        <td><?= $urut ?></td>
+                        <td><?= $stu->stuInfo->stu_first_name ?></td>
+                        <td><?= $stu->stuMasterCourse->course_name ?></td>
+                        <td><?= $stu->stuMasterSection->section_name ?></td>
+                        <td><?= Paymentpackagedetail::getAmountByID($comp,$category) ?></td>
+                        <td><?= 'd'?></td>
+                        <td><input type="submit" value="Submit" class="btn btn-primary"></td>
+                    </tr>
+                    <?php $urut++;?>
+                <?php endforeach;?>
+            </table>
+
+    <?php endif;?>
+    <?php ActiveForm::end(); ?>
 </div>
 
 

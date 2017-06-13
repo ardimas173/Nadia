@@ -38,6 +38,8 @@
 
 namespace app\modules\fees\controllers;
 use app\models\PaymentForm;
+use app\models\Paymentpackagedetail;
+use app\modules\course\models\Batches;
 use Yii;
 use app\modules\fees\models\FeesPaymentTransaction;
 use yii\helpers\Url;
@@ -48,6 +50,10 @@ use mPDF;
 
 class FeesPaymentTransactionController extends Controller
 {
+        public function actionReset(){
+            $cmd = 'truncate table fees_payment_transaction';
+            Yii::$app->db->createCommand($cmd)->execute();
+        }
     	public function behaviors()
     {
         return [
@@ -68,7 +74,7 @@ class FeesPaymentTransactionController extends Controller
         ]);
     }
 
-	public function actionCollect()
+	    public function actionCollect()
 	{
 		$FptModel = new FeesPaymentTransaction();
 		$FccModel = new \app\modules\fees\models\FeesCollectCategory();
@@ -86,22 +92,21 @@ class FeesPaymentTransactionController extends Controller
 
 	}
 
-	public function actionCollecttwo($comp=0,$course=0,$category=0)
-	{
-		$model = new PaymentForm();
+	    public function actionCollecttwo($comp=0,$course=0,$category=0)
+	    {
+            $model = new PaymentForm();
 
-		if(Yii::$app->request->isPost)
-		{
-			$model->load(Yii::$app->request->post());
-			$comp=$model->category;
+            if(Yii::$app->request->isPost){
+                $model->load(Yii::$app->request->post());
+                $comp=$model->category;
 
-			$this->redirect(Url::current(['comp'=>$comp,'course'=>$model->course,'category'=>$model->category]));
-		}
+                $this->redirect(Url::current(['comp'=>$comp,'course'=>$model->course,'category'=>$model->category]));
+            }
 
-		return $this->render('collect2',[
-			'model'=>$model
-		]);
-	}
+            return $this->render('collect2',[
+                'model'=>$model
+            ]);
+	    }
 
     	public function actionExportFccWiseFeesPdf($fccid)
     {
