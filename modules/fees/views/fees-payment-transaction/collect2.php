@@ -18,6 +18,12 @@ use yii\widgets\ActiveForm;
 $rows=[];
 $isGood = false;
 
+$comp = isset($_GET['comp']) ? ['comp'=>$_GET['comp']] : '';
+$course = isset($_GET['course']) ? $_GET['course'] : '';
+$category = isset($_GET['categoy']) ? $_GET['categoy'] : '';
+
+
+
 $category = isset($_GET['category']) ? $_GET['category'] : '0';
 $course = isset($_GET['course']) ? $_GET['course'] : '0';
 $comp = isset($_GET['comp']) ? $_GET['comp'] : '0';
@@ -96,7 +102,8 @@ if(isset($_GET['course']) && isset($_GET['category']) ) {
                         <td><?= $stu->stuMasterSection->section_name ?></td>
                         <td><?= Paymentpackagedetail::getAmountByID($comp,$category) ?></td>
                         <td><?= 'd'?></td>
-                        <td><input type="submit" value="Submit" class="btn btn-primary"></td>
+                        <td><?= Html::a('Bayar',Url::toRoute(['/fees/fees-payment-transaction/pay-fees','sid'=>$stu->stuInfo->stu_info_id,'fcid'=>1]))?>
+                        </td>
                     </tr>
                     <?php $urut++;?>
                 <?php endforeach;?>
